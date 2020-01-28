@@ -17,7 +17,10 @@ import {
   Feed,
   Input,
   Comment,
-  Form
+  Form,
+    Segment,
+    Loader,
+    Dimmer
 } from "semantic-ui-react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
@@ -41,7 +44,8 @@ const users = [
 
 const host = {
   domain: "http://localhost:3000/api",
-  allItems: "/items"
+  allItems: "/items",
+  reviews: '/reviews'
 };
 
 const apiGetItems = async () => {
@@ -57,16 +61,25 @@ function App() {
   const [items, setItems] = useState([]);
   useEffect(() => {
     apiGetItems().then(r => {
-      setItems(r)
+      setItems(r);
       console.log(items);
     });
   }, []);
   if(items.length === 0){
-    return <h1>loading..........</h1>
+    return (
+        <Segment>
+          <Dimmer active inverted>
+            <Loader size='large'>Loading</Loader>
+          </Dimmer>
+
+          <Image src='/images/wireframe/paragraph.png' />
+        </Segment>
+    )
   }
   else
     console.log(items)
   return (
+<div style={{width: '80%', margin: 'auto'}} >
     <Grid>
       <Grid.Row>
         <GridColumn width={3}>
@@ -79,8 +92,9 @@ function App() {
               {
                 items.map((item,index )=>{
                     return(
-                        <Grid.Column key={index}>
+                        <Grid.Column key={index} style={{marginBottom:'2em'}}>
                           <ReviewCard
+                          itemId={item.id}
                           title={item.title}
                           created_at={item.created_at}
                           image={item.image}
@@ -129,6 +143,7 @@ function App() {
         </GridColumn>
       </Grid.Row>
     </Grid>
+  </div >
   );
 }
 
@@ -157,30 +172,19 @@ const ReviewCard = props => {
               <Icon name="comment" />
               {props.reviewsCount || 22} reviews
             </span>
-            <ReviewDetail
-                image={props.image}
-                title={props.title}
-                reviews={props.reviews}
-            />
-            {/*<Popup*/}
-            {/*    content='I will not flip!'*/}
-            {/*    on='click'*/}
-            {/*    pinned*/}
-            {/*    trigger={<Button content='comment' />}*/}
-            {/*>*/}
-            {/*  <Popup.Header>*/}
-            {/*    Write a quick comment*/}
-            {/*  </Popup.Header>*/}
-            {/*  <Popup.Content>*/}
-            {/*    <Input*/}
-            {/*        icon='tags'*/}
-            {/*        iconPosition='left'*/}
-            {/*        label={{ tag: true, content: 'comment' }}*/}
-            {/*        labelPosition='right'*/}
-            {/*        placeholder='Enter tags'*/}
-            {/*    />*/}
-            {/*  </Popup.Content>*/}
-            {/*</Popup>*/}
+
+            <div className='ui two buttons'>
+              {/*quick reply*/}
+              <QuickReply itemId={props.itemId}/>
+              {/*end of quick reply*/}
+              <ReviewDetail
+                  image={props.image}
+                  title={props.title}
+                  reviews={props.reviews}
+                  itemId={props.itemId}
+              />
+            </div>
+
           </Card.Content>
         </Card>
       }
@@ -191,6 +195,60 @@ const ReviewCard = props => {
       </Popup.Content>
     </Popup>
   );
+};
+
+const apiReviewPost = async (data) =>{
+  try{
+    const response = await fetch(host.domain + host.reviews,{
+      method: "Post",
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    return await response.json()
+  }
+  catch (e) {
+    
+  }
+};
+
+const QuickReply = (props) => {
+  const [input, setInput] = useState('');
+  const createReview = () =>{
+    const data = {
+      "comment":input,
+      "reviewable_id": props.itemId
+    };
+    apiReviewPost(data).then(response =>{
+      alert(response.status)
+    })
+  };
+
+  return(
+      <Popup
+          content='quick reply'
+          on='click'
+          pinned
+          trigger={<Button primary content='comment' />}
+      >
+        <Popup.Header>
+
+        {input || 'Write a quick comment'}
+        </Popup.Header>
+        <Popup.Content>
+          <Input
+              icon='tags'
+              iconPosition='left'
+              label={{ tag: true, content: 'comment' }}
+              labelPosition='right'
+              placeholder='Enter tags'
+              onChange={(e) => { setInput(e.target.value)}}
+          />
+          <button onClick={() => createReview()}> Post </button>
+        </Popup.Content>
+      </Popup>
+  )
 };
 
 const Feeder = () => (
@@ -246,7 +304,9 @@ const ReviewDetail = (props) => {
       <Modal.Description>
         <Header>{props.title || 'Review Title'}</Header>
         <p>This is what happened and i am still having issues.</p>
-        <Comments reviews={props.reviews}/>
+
+        {/*Comments*/}
+        <Comments reviews={props.reviews} itemId={props.itemId}/>
 
       </Modal.Description>
     </Modal.Content>
@@ -254,6 +314,7 @@ const ReviewDetail = (props) => {
       <Button primary>
         Close <Icon name="right chevron"/>
       </Button>
+
     </Modal.Actions>
   </Modal>
 };
@@ -274,15 +335,28 @@ const UserComment  = (props) =>(
     </Comment>
 );
 
-const Comments = (props) => (
-  <Comment.Group>
+
+
+const Comments = (props) => {
+  const [input, setInput] = useState('');
+  const createReview = () => {
+    const data = {
+      "comment": input,
+      "reviewable_id": props.itemId
+    };
+    apiReviewPost(data).then(response =>{
+      alert(response.status)
+
+    })
+  };
+  return <Comment.Group>
     <Header as="h3" dividing>
       Comments
     </Header>
 
     {
       props.reviews.length === 0 ? '' :
-          props.reviews.map((review, index) =>{
+          props.reviews.map((review, index) => {
             return <UserComment key={index}
                                 name={review.user.email}
                                 created_at={review.created_at}
@@ -337,8 +411,8 @@ const Comments = (props) => (
     {/*</Comment>*/}
 
     <Form reply>
-      <Form.TextArea />
-      <Button content="Add Reply" labelPosition="left" icon="edit" primary />
+      <Form.TextArea onChange={(e) => setInput(e.target.value)}/>
+      <Button onClick={() => createReview()} content="Add Reply" labelPosition="left" icon="edit" primary/>
     </Form>
   </Comment.Group>
-);
+};
