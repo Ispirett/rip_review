@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
   Button,
   Menu,
@@ -24,23 +23,7 @@ import {
 } from "semantic-ui-react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
-const users = [
-  {
-    name: "Elliot Fu",
-    bio: "Elliot has been a member since July 2012",
-    avatar: "http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png"
-  },
-  {
-    name: "Stevie Feliciano",
-    bio: "Stevie has been a member since August 2013",
-    avatar: "http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png"
-  },
-  {
-    name: "Matt",
-    bio: "Matt has been a member since July 2014",
-    avatar: "http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png"
-  }
-];
+import MainMenu from "./components/MainMenu";
 
 const host = {
   domain: "http://localhost:3000/api",
@@ -57,33 +40,44 @@ const apiGetItems = async () => {
   }
 };
 
+
+const Notfication = () => (
+    <Message>
+      <Message.Header>Changes in Service</Message.Header>
+      <p>
+        We updated our privacy policy here to better service our customers. We
+        recommend reviewing the changes.
+      </p>
+    </Message>
+);
 function App() {
   const [items, setItems] = useState([]);
+
   useEffect(() => {
-    apiGetItems().then(r => {
-      setItems(r);
+    apiGetItems().then(response => {
+      setItems(response);
       console.log(items);
     });
   }, []);
   if(items.length === 0){
     return (
-        <Segment>
-          <Dimmer active inverted>
-            <Loader size='large'>Loading</Loader>
-          </Dimmer>
-
-          <Image src='/images/wireframe/paragraph.png' />
-        </Segment>
+          <Segment raised style={{height: '100vh', background: 'black'}} >
+            <Dimmer active inverted  style={{background:'#262626'}}>
+              <Image src='https://i.imgur.com/4FO9toe.gif' />
+            </Dimmer>
+          </Segment>
     )
   }
   else
     console.log(items)
   return (
 <div style={{width: '80%', margin: 'auto'}} >
+  <Notfication/>
     <Grid>
       <Grid.Row>
         <GridColumn width={3}>
-          <Feeder />
+          {/*<Feeder />*/}
+          <MainMenu/>
         </GridColumn>
 
         <GridColumn width={13}>
@@ -220,9 +214,15 @@ const QuickReply = (props) => {
       "comment":input,
       "reviewable_id": props.itemId
     };
-    apiReviewPost(data).then(response =>{
-      alert(response.status)
-    })
+
+    if(input !== '') {
+      apiReviewPost(data).then(response => {
+        alert(response.status)
+      })
+    }
+    else {
+      alert('please enter some text')
+    }
   };
 
   return(
@@ -244,6 +244,7 @@ const QuickReply = (props) => {
               labelPosition='right'
               placeholder='Enter tags'
               onChange={(e) => { setInput(e.target.value)}}
+              required
           />
           <button onClick={() => createReview()}> Post </button>
         </Popup.Content>
@@ -410,9 +411,9 @@ const Comments = (props) => {
     {/*  </Comment.Content>*/}
     {/*</Comment>*/}
 
-    <Form reply>
-      <Form.TextArea onChange={(e) => setInput(e.target.value)}/>
-      <Button onClick={() => createReview()} content="Add Reply" labelPosition="left" icon="edit" primary/>
+    <Form reply onSubmit={() => createReview()}>
+      <Form.TextArea onChange={(e) => setInput(e.target.value)} required />
+      <Button content="Add Reply" labelPosition="left" icon="edit" primary/>
     </Form>
   </Comment.Group>
 };
