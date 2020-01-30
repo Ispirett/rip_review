@@ -2,7 +2,7 @@ import React,{useReducer, createContext} from "react";
 
 const initState = {
     items: [],
-    reviews:[],
+    authentication:{login:false}
 };
 const actions = {
     ITEMS: 'ITEMS'

@@ -1,11 +1,40 @@
-import React, { useContext } from "react";
-import { AppContext } from "../container/AppContainer";
+import React, {useContext, useEffect, useState} from "react";
+import {actions, AppContext} from "../container/AppContainer";
 import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 import Comments from "./Comments";
+import Utils from "./Utils";
+
+const { host } = Utils;
+
+const apiGetItems = async () => {
+    try {
+        let response = await fetch(host.domain + host.allItems);
+        return await response.json();
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const apiReviewPost = async data => {
+    try {
+        const response = await fetch(host.domain + host.reviews, {
+            method: "Post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return await response.json();
+    } catch (e) {}
+};
+
+
 export default props => {
   const [state, dispatch] = useContext(AppContext);
+    const [input, setInput] = useState("");
+
   return (
-    <Modal trigger={<Button>ShowDetails..</Button>}>
+    <Modal trigger={<Button onClick={() => console.log(props.itemId)}>Show Details</Button>}>
       <Modal.Header>Profile Picture</Modal.Header>
       <Modal.Content image>
         <Image

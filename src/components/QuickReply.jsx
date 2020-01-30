@@ -39,14 +39,15 @@ export default props => {
     if (input !== "") {
       apiReviewPost(data).then(response => {
         alert(response.status);
+        apiGetItems().then(response => {
+          dispatch({ type: actions.ITEMS, items: response });
+          console.log(state.items);
+        });
       });
     } else {
       alert("please enter some text");
     }
-    apiGetItems().then(response => {
-      dispatch({ type: actions.ITEMS, items: response });
-      console.log(state.items);
-    });
+
   };
 
   return (

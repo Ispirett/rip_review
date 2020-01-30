@@ -1,8 +1,16 @@
 import { Button, Comment, Form, Header } from "semantic-ui-react";
-import React, { useContext, useState } from "react";
-import { AppContext } from "../container/AppContainer";
+import React, {useContext, useEffect, useState} from "react";
+import {actions, AppContext} from "../container/AppContainer";
 import Utils from "./Utils";
 const { host } = Utils;
+const apiGetItems = async () => {
+  try {
+    let response = await fetch(host.domain + host.allItems);
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const apiReviewPost = async data => {
   try {
@@ -36,6 +44,8 @@ const UserComment = props => (
 export default props => {
   const [input, setInput] = useState("");
   const [state, dispatch] = useContext(AppContext);
+  //Probably consider and loading spinner
+
   const createReview = () => {
     const data = {
       comment: input,
@@ -43,8 +53,13 @@ export default props => {
     };
     apiReviewPost(data).then(response => {
       alert(response.status);
+      apiGetItems().then(response => {
+        dispatch({ type: actions.ITEMS, items: response });
+        console.log(state.items);
+      });
     });
   };
+
   return (
     <Comment.Group>
       <Header as="h3" dividing>
