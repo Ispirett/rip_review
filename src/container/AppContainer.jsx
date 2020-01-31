@@ -1,11 +1,16 @@
 import React,{useReducer, createContext} from "react";
-
+import Utils from "../components/Utils";
 const initState = {
     items: [],
-    authentication:{login:false}
+    authentication:{
+        token: Utils.tokenStore.get() || '',
+        login: Utils.tokenStore.get() === ''? false : true,
+    }
 };
 const actions = {
-    ITEMS: 'ITEMS'
+    ITEMS: 'ITEMS',
+    AUTH: 'AUTH',
+    LOGOUT: 'LOGOUT'
 };
 const AppContext = createContext(initState);
 const reducer = (state, action) =>{
@@ -14,6 +19,23 @@ const reducer = (state, action) =>{
             return {
                 ...state,
                 items: action.items
+            };
+        case actions.AUTH:
+           Utils.tokenStore.store(action.token);
+            return {
+                ...state,
+                authentication: {
+                   token: action.token,
+                    login: action.token !== undefined ? true: false
+                }
+            };
+        case actions.LOGOUT:
+            Utils.tokenStore.store('');
+            return {
+                ...state,
+                authentication: {
+                    login: false
+                }
             };
         default:
             return state

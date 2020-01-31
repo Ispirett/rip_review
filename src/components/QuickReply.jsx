@@ -52,7 +52,6 @@ export default props => {
 
   return (
     <Popup
-      content="quick reply"
       on="click"
       pinned
       trigger={<Button color={'google plus'} content="comment" />}
