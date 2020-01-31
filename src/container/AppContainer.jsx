@@ -4,7 +4,7 @@ const initState = {
     items: [],
     authentication:{
         token: Utils.tokenStore.get() || '',
-        login: Utils.tokenStore.get() === ''? false : true,
+        login: Utils.tokenStore.get() ? true: false,
     }
 };
 const actions = {

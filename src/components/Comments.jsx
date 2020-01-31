@@ -12,11 +12,12 @@ const apiGetItems = async () => {
   }
 };
 
-const apiReviewPost = async data => {
+const apiReviewPost = async (data , token)=> {
   try {
     const response = await fetch(host.domain + host.reviews, {
       method: "Post",
       headers: {
+        "AuthToken": token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
@@ -29,7 +30,7 @@ const UserComment = props => (
   <Comment>
     <Comment.Avatar src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" />
     <Comment.Content>
-      <Comment.Author as="a">{props.name || "Username"}</Comment.Author>
+      <Comment.Author as='a'>@{props.name || "Username"}</Comment.Author>
       <Comment.Metadata>
         <div>{props.created_at || "Today at 5:42PM"}</div>
       </Comment.Metadata>
@@ -47,15 +48,17 @@ export default props => {
   //Probably consider and loading spinner
 
   const createReview = () => {
+    if(!Utils.isLoggedIn(state)) return alert('Use need to login in before commenting');
     const data = {
       comment: input,
       reviewable_id: props.itemId
     };
-    apiReviewPost(data).then(response => {
+
+    apiReviewPost(data, state.authentication.token).then(response => {
       alert(response.status);
       apiGetItems().then(response => {
         dispatch({ type: actions.ITEMS, items: response });
-        console.log(state.items);
+       //console.log(state.items);
       });
     });
   };
@@ -72,7 +75,7 @@ export default props => {
             return (
               <UserComment
                 key={index}
-                name={review.user.email}
+                name={review.user.username}
                 created_at={review.created_at}
                 comment={review.comment}
               />
@@ -126,7 +129,7 @@ export default props => {
 
       <Form reply onSubmit={() => createReview()}>
         <Form.TextArea onChange={e => setInput(e.target.value)} required />
-        <Button content="Add Reply" labelPosition="left" icon="edit" primary />
+        <Button content="Add Reply" labelPosition="left" icon="edit" color={'teal'} />
       </Form>
     </Comment.Group>
   );

@@ -21,24 +21,64 @@ const apiLogin = async data => {
   }
 };
 
+const apiSignUp = async data => {
+    try {
+        const response = await fetch(host.main + host.signUp, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return response.json();
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+
 export default () => {
   const [state, dispatch] = useContext(AppContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
 
   const handleLogin = e => {
     e.preventDefault();
-    console.log(email, password);
     const data = {
       email: email,
       password: password
     };
     apiLogin(data).then(response => {
-      alert(response.status + response.token);
-      dispatch({ type: actions.AUTH, token: response.token });
-      dispatch({ type: actions.AUTH, token: response.token });
+      if(response.status === 'success') {
+          alert(response.status);
+          dispatch({type: actions.AUTH, token: response.token});
+      }
+      else if(response.status === 'failed'){
+      alert(response.msg)
+      }
     });
   };
+
+  const handleSignUp = (e) =>{
+      e.preventDefault()
+      const data = {
+         user:{ email: email,
+          password: password,
+          username: username,
+          name:name
+      }};
+      apiSignUp(data).then(response =>{
+          if (response.status === 'success') {
+              dispatch({type: actions.AUTH, token: response.token})
+          }
+          else if(response.status === 'failed'){
+              alert(response.msg)
+          }
+
+      })
+  }
 
   if (state.authentication.login) {
     return (
@@ -53,12 +93,10 @@ export default () => {
           pinned
           on="click"
           trigger={
-            <Button color={"google plus"} content={"SignIn"}>
-              {" "}
+            <Button color={"google plus"} >
               <Icon name="user" /> SignIn
             </Button>
           }
-          content={"This is really kool here"}
           position="bottom right"
         >
           <Popup.Header>Sign In</Popup.Header>
@@ -98,41 +136,29 @@ export default () => {
           pinned
           on="click"
           trigger={
-            <Button color={"google plus"} content={"SignUp"}>
-              {" "}
+            <Button color={"google plus"} >
               <Icon name="user" /> SignUp
             </Button>
           }
-          content={"This is really kool here"}
           position="bottom right"
         >
           <Popup.Header>Become a Member</Popup.Header>
           <Popup.Content>
-            <Form>
+            <Form onSubmit={(e) => handleSignUp(e)}>
               <Form.Group widths="equal">
                 <Form.Field
                   id="form-input-control-first-name"
                   control={Input}
                   label="Name"
                   placeholder="Name"
-                  onChange={e =>
-                    dispatch({
-                      type: actions.AUTH,
-                      credentials: { name: e.target.value }
-                    })
-                  }
+                  onChange={e => setName(e.target.value)}
                 />
                 <Form.Field
                   id="form-input-control-last-name"
                   control={Input}
                   label="Username"
                   placeholder="Username"
-                  onChange={e =>
-                    dispatch({
-                      type: actions.AUTH,
-                      credentials: { username: e.target.value }
-                    })
-                  }
+                  onChange={e =>  setUsername(e.target.value)}
                 />
               </Form.Group>
 
@@ -142,12 +168,7 @@ export default () => {
                   control={Input}
                   label="Email"
                   placeholder="name@example.com"
-                  onChange={e =>
-                    dispatch({
-                      type: actions.AUTH,
-                      credentials: { email: e.target.value }
-                    })
-                  }
+                  onChange={e => setEmail(e.target.value )}
                   // error={{
                   //     content: 'Please enter a valid email address',
                   //     pointing: 'below',
@@ -159,12 +180,7 @@ export default () => {
                   label="Password"
                   placeholder="Password"
                   type="password"
-                  onChange={e =>
-                    dispatch({
-                      type: actions.AUTH,
-                      credentials: { password: e.target.value }
-                    })
-                  }
+                  onChange={e => setPassword(e.target.value)}
                 />
               </Form.Group>
               <Form.Field

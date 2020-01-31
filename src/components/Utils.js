@@ -5,6 +5,7 @@ export default {
         allItems: "/items",
         reviews: '/reviews',
         login:'/auth/login',
+        signUp:'/auth/signup',
 
     },
     tokenStore: (() =>{
@@ -12,12 +13,19 @@ export default {
             return localStorage.setItem('token', token || '' )
         }
         const get =  ()=>{
-            return localStorage.getItem('token')
+            if(localStorage.getItem('token') === null) return false;
+            else{
+               return  localStorage.getItem('token')
+            }
+
         }
         return {
             store,
             get
         }
-    })()
+    })(),
+    isLoggedIn: (state) =>{
+        return state.authentication.login
+    }
 
 }

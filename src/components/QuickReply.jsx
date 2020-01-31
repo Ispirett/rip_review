@@ -14,11 +14,12 @@ const apiGetItems = async () => {
   }
 };
 
-const apiReviewPost = async data => {
+const apiReviewPost = async (data,token) => {
   try {
     const response = await fetch(host.domain + host.reviews, {
       method: "Post",
       headers: {
+        "AuthToken": token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
@@ -30,15 +31,23 @@ const apiReviewPost = async data => {
 export default props => {
   const [input, setInput] = useState("");
   const [state, dispatch] = useContext(AppContext);
+
+
   const createReview = () => {
     const data = {
       comment: input,
       reviewable_id: props.itemId
     };
+   if(!Utils.isLoggedIn(state)) return alert('Use need to login in before commenting');
 
     if (input !== "") {
-      apiReviewPost(data).then(response => {
-        alert(response.status);
+      apiReviewPost(data, state.authentication.token).then(response => {
+        if(response.status === 'failed')
+          // This is when token expires
+        alert('please logout and log in again');
+        else if (response.status === 'success'){
+          alert(response.status)
+        }
         apiGetItems().then(response => {
           dispatch({ type: actions.ITEMS, items: response });
           console.log(state.items);
