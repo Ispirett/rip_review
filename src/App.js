@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
-import MainMenu from "./components/MainMenu";
 import AppContainer from "./container/AppContainer";
 import MainContainer from "./container/MainContainer";
 import HeaderContainer from "./container/HeaderContainer";

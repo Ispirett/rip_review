@@ -6,6 +6,7 @@ export default {
         reviews: '/reviews',
         login:'/auth/login',
         signUp:'/auth/signup',
+        itemCreate: '/items'
 
     },
     tokenStore: (() =>{

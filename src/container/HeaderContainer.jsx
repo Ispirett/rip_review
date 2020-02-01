@@ -3,6 +3,7 @@ import {Button,Popup,Form,Input,Icon} from "semantic-ui-react";
 import '../css/main.css'
 import NavSearch from "../components/NavSearch";
 import Authentication from "../components/Authentication";
+import ItemForm from "../components/ItemForm";
 
 
 
@@ -15,6 +16,7 @@ export default () =>(
           <ul className={'nav-ul'}>
               <li>Home</li>
               <li >About</li>
+              <li><ItemForm/></li>
             <li>
                 {/*Authentication*/}
                 <Authentication/>

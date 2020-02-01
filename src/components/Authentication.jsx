@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Form, Icon, Input, Popup } from "semantic-ui-react";
 import Utils from "./Utils";
-const { host, tokenStore} = Utils;
+const { host} = Utils;
 
 
 
