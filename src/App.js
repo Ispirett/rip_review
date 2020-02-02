@@ -5,11 +5,12 @@ import AppContainer from "./container/AppContainer";
 import MainContainer from "./container/MainContainer";
 import HeaderContainer from "./container/HeaderContainer";
 
+
 function App() {
 return(
   <AppContainer>
    <HeaderContainer/>
-   <MainContainer/>
+       <MainContainer/>
  </AppContainer>
 )
 }

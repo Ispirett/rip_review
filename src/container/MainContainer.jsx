@@ -11,7 +11,7 @@ import {
 import MainMenu from "../components/MainMenu";
 import ReviewCard from "../components/ReviewCard";
 import Utils from "../components/Utils";
-
+import {LazyLoadComponent} from 'react-lazy-load-image-component'
 const { host } = Utils;
 
 const apiGetItems = async () => {
@@ -68,15 +68,19 @@ export default () => {
                 {state.items.map((item, index) => {
                   return (
                     <Grid.Column key={index} style={{ marginBottom: "2em" }}>
+                      <LazyLoadComponent>
                       <ReviewCard
                         itemId={item.id}
                         title={item.title}
+                        description={item.description}
                         created_at={item.created_at}
                         image={item.image}
                         reviewsCount={item.reviewsCount}
                         reviews={item.reviews}
                       />
+                      </LazyLoadComponent>
                     </Grid.Column>
+
                   );
                 })}
               </Grid.Row>

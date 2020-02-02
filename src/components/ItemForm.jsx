@@ -8,7 +8,7 @@ import {
   Select,
 
 } from "semantic-ui-react";
-import { AppContext } from "../container/AppContainer";
+import {actions, AppContext} from "../container/AppContainer";
 import Utils from "./Utils";
 const { host } = Utils;
 const categoryOptions = [
@@ -19,17 +19,23 @@ const categoryOptions = [
 
 const apiItemCreate = async (data, token) => {
   try {
+    const formData = new FormData()
+      formData.append('item[title]',data.title);
+      formData.append('item[category]', data.category);
+      formData.append('item[description]', data.description);
+      formData.append('item[image]', data.image);
     const response = await fetch(host.domain + host.itemCreate, {
       method: "Post",
       headers: {
-        "Content-Type": "application/json",
         AuthToken: token
       },
-      body: JSON.stringify(data)
+      body: formData
     });
     return response.json();
   } catch (e) {}
 };
+
+
 
 export default () => {
   const [state, dispatch] = useContext(AppContext);
@@ -37,27 +43,29 @@ export default () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState('')
-
+    const  fileRef = React.createRef()
   const handleSubmit = e => {
-      const form = new FormData()
-   e.preventDefault();
-    const data = {
-      item: {
-        title,
-        description: description,
-        category: category || 'business',
-        image: image
-      }
-    };
+    e.preventDefault();
+    // convert image to base64
+        const data = {
+                title,
+                description: description,
+                category: category || 'business',
+                image: image
+        };
 
-    console.table(data, form);
-    apiItemCreate(data, state.authentication.token).then(response => {
-        if(response.status === 'failed')
-        alert(response.msg)
-        else if(response.status === 'success'){
-            alert('saved successfully')
-        }
-    });
+        console.table(data);
+        apiItemCreate(data, state.authentication.token).then(response => {
+            if(response.status === 'failed')
+                alert(response.msg)
+            else if(response.status === 'success'){
+                console.log(response.item)
+                dispatch({type:actions.UPDATE_ITEMS,item:response.item})
+                alert('saved successfully')
+            }
+        });
+
+
   };
 
   if (state.authentication.login) {
@@ -65,12 +73,12 @@ export default () => {
       <Popup
         pinned
         on="click"
-        trigger={<Button content={"Add Item"} />}
+        trigger={<Button icon={'file'} color={'teal'} content={"Add Item"} />}
         position="bottom right"
       >
         <Popup.Header> Add a new Item to Review</Popup.Header>
         <Popup.Content>
-          <Form onSubmit={(e) => handleSubmit(e)} >
+          <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group widths="equal">
               <Form.Field
                 id="form-input-control-first-name"
@@ -105,22 +113,30 @@ export default () => {
               value={description}
               required
             />
-              <Form.Field
-                  id="form-textarea-control-opinion"
-                  control={Input}
-                  label="upload image"
-                  placeholder="What are your Views"
-                  onChange={e => setImage(e.target.files[0])}
-                  type='file'
-                  required
-
-              />
+              <Form.Field>
+                  <Button
+                  content='Upload Image'
+                  labelPosition='left'
+                  icon='file'
+                  onClick={()=> fileRef.current.click()}
+                  color={'teal'}
+                  />
+                  <input
+                      id="form-file"
+                      hidden
+                      onChange={e => setImage(e.target.files[0])}
+                      ref={fileRef}
+                      type='file'
+                      required
+                  />
+              </Form.Field>
 
             <Form.Field
               id="form-button-control-public"
               control={Button}
               content="Confirm"
               label="Please leave a truthful review"
+              color={'google plus'}
             />
           </Form>
         </Popup.Content>

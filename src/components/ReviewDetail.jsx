@@ -4,29 +4,29 @@ import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 import Comments from "./Comments";
 import Utils from "./Utils";
 
-const { host } = Utils;
+// const { host } = Utils;
 
-const apiGetItems = async () => {
-    try {
-        let response = await fetch(host.domain + host.allItems);
-        return await response.json();
-    } catch (e) {
-        console.log(e);
-    }
-};
-
-const apiReviewPost = async data => {
-    try {
-        const response = await fetch(host.domain + host.reviews, {
-            method: "Post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-        return await response.json();
-    } catch (e) {}
-};
+// const apiGetItems = async () => {
+//     try {
+//         let response = await fetch(host.domain + host.allItems);
+//         return await response.json();
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };
+//
+// const apiReviewPost = async data => {
+//     try {
+//         const response = await fetch(host.domain + host.reviews, {
+//             method: "Post",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify(data)
+//         });
+//         return await response.json();
+//     } catch (e) {}
+// };
 
 
 export default props => {
@@ -47,7 +47,7 @@ export default props => {
         />
         <Modal.Description>
           <Header>{props.title || "Review Title"}</Header>
-          <p>This is what happened and i am still having issues.</p>
+          <p>{props.description || "Comment to get more details"}</p>
 
           {/*Comments*/}
           <Comments reviews={props.reviews} itemId={props.itemId} />

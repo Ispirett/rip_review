@@ -10,7 +10,8 @@ const initState = {
 const actions = {
     ITEMS: 'ITEMS',
     AUTH: 'AUTH',
-    LOGOUT: 'LOGOUT'
+    LOGOUT: 'LOGOUT',
+    UPDATE_ITEMS: 'UPDATE_ITEMS'
 };
 const AppContext = createContext(initState);
 const reducer = (state, action) =>{
@@ -19,6 +20,11 @@ const reducer = (state, action) =>{
             return {
                 ...state,
                 items: action.items
+            };
+        case actions.UPDATE_ITEMS:
+            return {
+                ...state,
+                items: state.items.concat(action.item)
             };
         case actions.AUTH:
            Utils.tokenStore.store(action.token);
@@ -41,6 +47,7 @@ const reducer = (state, action) =>{
             return state
     }
 };
+
 export default ({children}) =>{
     const [state, dispatch] = useReducer(reducer, initState);
     return(

@@ -41,6 +41,7 @@ export default props => {
                 title={props.title}
                 reviews={props.reviews}
                 itemId={props.itemId}
+                description={props.description}
               />
             </div>
           </Card.Content>
