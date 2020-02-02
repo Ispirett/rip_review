@@ -7,7 +7,7 @@ export default props => {
     <Popup
       trigger={
         // Put this Card inIts on  Component ?
-        <Card>
+        <Card fluid>
           <Image
             src={
               props.image ||
@@ -20,10 +20,7 @@ export default props => {
               <span className="date">posted {props.created_at}</span>
             </Card.Meta>
             <Card.Description>
-              {props.description}
-              Two sisters move to the country with their father in order to be
-              closer to their hospitalized mother, and discover the surrounding
-              trees are inhabited by magical spirits.
+              {props.description || 'Checkout for more information'}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
@@ -50,7 +47,7 @@ export default props => {
     >
       <Popup.Header>User Rating</Popup.Header>
       <Popup.Content>
-        <Rating icon="star" defaultRating={3} maxRating={4} />
+        <Rating icon="star" defaultRating={4} maxRating={5} />
       </Popup.Content>
     </Popup>
   );

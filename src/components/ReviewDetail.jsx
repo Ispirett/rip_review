@@ -34,7 +34,7 @@ export default props => {
     const [input, setInput] = useState("");
 
   return (
-    <Modal trigger={<Button onClick={() => console.log(props.itemId)}>Show Details</Button>}>
+    <Modal trigger={<Button style={{maxHeight: '2.5em'}} onClick={() => console.log(props.itemId)}>details</Button>}>
       <Modal.Header>Profile Picture</Modal.Header>
       <Modal.Content image>
         <Image

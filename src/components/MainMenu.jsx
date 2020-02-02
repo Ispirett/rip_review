@@ -5,7 +5,7 @@ export default () => {
   const [activeItem, setActiveItem] = useState("");
   const handleItemClick = (e, { name }) => setActiveItem(name);
   return (
-    <Menu vertical>
+    <Menu fluid vertical>
       <Menu.Item>
         <Menu.Header>Businesses</Menu.Header>
 

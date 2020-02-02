@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
-import { Button, Form, Icon, Input, Popup } from "semantic-ui-react";
+import { Button, Form, Icon, Input, Popup} from "semantic-ui-react";
 import Utils from "./Utils";
 const { host} = Utils;
 
@@ -89,6 +89,7 @@ export default () => {
   } else {
     return (
       <div>
+
         <Popup
           pinned
           on="click"
@@ -99,6 +100,7 @@ export default () => {
           }
           position="bottom right"
         >
+
           <Popup.Header>Sign In</Popup.Header>
           <Popup.Content>
             <Form onSubmit={e => handleLogin(e)}>
@@ -193,6 +195,7 @@ export default () => {
             </Form>
           </Popup.Content>
         </Popup>
+
       </div>
     );
   }

@@ -6,7 +6,8 @@ import {
   GridColumn,
   Image,
   Message,
-  Segment
+  Segment,
+    Responsive
 } from "semantic-ui-react";
 import MainMenu from "../components/MainMenu";
 import ReviewCard from "../components/ReviewCard";
@@ -55,19 +56,19 @@ export default () => {
   } else console.log(state.items);
   return (
     <div style={{ width: "80%", margin: "auto" }}>
-      <Grid>
+      <Grid stackable doubling>
         <Grid.Row>
-          <GridColumn width={3}>
-            {/*<Feeder />*/}
-            <MainMenu />
-          </GridColumn>
+            <GridColumn width={4} >
+              {/*<Feeder />*/}
+              <MainMenu />
+            </GridColumn>
 
-          <GridColumn width={13}>
-            <Grid>
-              <Grid.Row columns={4}>
+          <GridColumn width={12}>
+            <Grid columns='3' stackable doubling >
+              <Grid.Row >
                 {state.items.map((item, index) => {
                   return (
-                    <Grid.Column key={index} style={{ marginBottom: "2em" }}>
+                    <Grid.Column key={index} style={{ marginBottom: "2em" }} >
                       <LazyLoadComponent>
                       <ReviewCard
                         itemId={item.id}

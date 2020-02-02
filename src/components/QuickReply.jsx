@@ -63,7 +63,7 @@ export default props => {
     <Popup
       on="click"
       pinned
-      trigger={<Button color={'google plus'} content="comment" />}
+      trigger={<Button style={{maxHeight: '2.5em'}} color={'google plus'} content="comment" />}
       position='top center'
     >
       <Popup.Header>{input || "Write a quick comment"}</Popup.Header>
@@ -79,6 +79,7 @@ export default props => {
           }}
           required
         />
+        <Button id={'emoji-button'}> Smile</Button>
         <Button fluid size='tiny' color={'teal'} onClick={() => createReview()}> Post</Button>
       </Popup.Content>
     </Popup>
