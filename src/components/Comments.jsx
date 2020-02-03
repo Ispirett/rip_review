@@ -75,7 +75,7 @@ export default props => {
             return (
               <UserComment
                 key={index}
-                name={review.user.username}
+                name={review.comment.user.username}
                 created_at={review.created_at}
                 comment={review.comment}
               />
