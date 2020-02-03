@@ -2,8 +2,22 @@ import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Input, Popup } from "semantic-ui-react";
 import Utils from "./Utils";
+import EmojiButton from "@joeattardi/emoji-button";
 
 const { host } = Utils;
+
+const t = () =>{
+  const button = document.querySelector('#emoji-button');
+  const picker = new EmojiButton();
+
+  picker.on('emoji', emoji => {
+    document.querySelector('input').value += emoji;
+  });
+
+  button.onclick = () =>{
+    picker.pickerVisible ? picker.hidePicker() : picker.showPicker(button);
+  }
+}
 
 const apiGetItems = async () => {
   try {
@@ -69,17 +83,17 @@ export default props => {
       <Popup.Header>{input || "Write a quick comment"}</Popup.Header>
       <Popup.Content>
         <Input
-          icon="tags"
+          icon="mail"
           iconPosition="left"
           label={{ tag: true, content: "comment" }}
           labelPosition="right"
-          placeholder="Enter tags"
+          placeholder="Write a short comment"
           onChange={e => {
             setInput(e.target.value);
           }}
           required
         />
-        <Button id={'emoji-button'}> Smile</Button>
+        {/*<Button onClick={()=> t()} id={'emoji-button'}> Smile</Button>*/}
         <Button fluid size='tiny' color={'teal'} onClick={() => createReview()}> Post</Button>
       </Popup.Content>
     </Popup>

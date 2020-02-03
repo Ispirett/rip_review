@@ -1,7 +1,7 @@
 export default {
     host:{
-        domain: "http://localhost:3000/api",
-        main:'http://localhost:3000',
+        domain: "https://reviewtt.herokuapp.com/api",
+        main:'https://reviewtt.herokuapp.com',
         allItems: "/items",
         reviews: '/reviews',
         login:'/auth/login',

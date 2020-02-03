@@ -30,8 +30,8 @@ import Utils from "./Utils";
 
 
 export default props => {
-  const [state, dispatch] = useContext(AppContext);
-    const [input, setInput] = useState("");
+  // const [state, dispatch] = useContext(AppContext);
+  //   const [input, setInput] = useState("");
 
   return (
     <Modal trigger={<Button style={{maxHeight: '2.5em'}} onClick={() => console.log(props.itemId)}>details</Button>}>

@@ -58,13 +58,13 @@ export default () => {
     <div style={{ width: "80%", margin: "auto" }}>
       <Grid stackable doubling>
         <Grid.Row>
-            <GridColumn width={4} >
-              {/*<Feeder />*/}
-              <MainMenu />
-            </GridColumn>
+            {/*<GridColumn width={3} >*/}
+            {/*  /!*<Feeder />*!/*/}
+            {/*  <MainMenu />*/}
+            {/*</GridColumn>*/}
 
-          <GridColumn width={12}>
-            <Grid columns='3' stackable doubling >
+          <GridColumn >
+            <Grid columns='four' stackable doubling >
               <Grid.Row >
                 {state.items.map((item, index) => {
                   return (
