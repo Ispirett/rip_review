@@ -2,22 +2,10 @@ import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Input, Popup } from "semantic-ui-react";
 import Utils from "./Utils";
-import EmojiButton from "@joeattardi/emoji-button";
 
 const { host } = Utils;
 
-const t = () =>{
-  const button = document.querySelector('#emoji-button');
-  const picker = new EmojiButton();
 
-  picker.on('emoji', emoji => {
-    document.querySelector('input').value += emoji;
-  });
-
-  button.onclick = () =>{
-    picker.pickerVisible ? picker.hidePicker() : picker.showPicker(button);
-  }
-}
 
 const apiGetItems = async () => {
   try {
