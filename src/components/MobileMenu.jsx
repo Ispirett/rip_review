@@ -17,8 +17,13 @@ export default () => {
                         src={logo}
                         alt='image'
                     />
-                    <Button onClick={() => handleMenuSate()}>
-                        <Icon name='sort amount up' />
+                    <Button animated onClick={() => handleMenuSate()}>
+                        <Button.Content visible>
+                            <Icon name='sort amount up' />
+                        </Button.Content>
+                        <Button.Content hidden>
+                            <Icon name='sort amount down' />
+                        </Button.Content>
                     </Button>
                 </div>
                 <MenuContainer/>

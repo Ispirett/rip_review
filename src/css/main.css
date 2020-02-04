@@ -93,6 +93,7 @@ display: flex;
 }
 #mobile-menu-container > button{
     background: transparent;
+    color: white !important;
 }
 .logo-image{
     border-radius: 0 0 2em ;

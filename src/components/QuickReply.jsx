@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
-import {Button, Icon, Input, Grid, Popup, Divider} from "semantic-ui-react";
+import { Button, Icon, Input, Grid, Popup, Divider } from "semantic-ui-react";
 import Utils from "./Utils";
 
 const { host } = Utils;
-
-
 
 const apiGetItems = async () => {
   try {
@@ -16,12 +14,12 @@ const apiGetItems = async () => {
   }
 };
 
-const apiReviewPost = async (data,token) => {
+const apiReviewPost = async (data, token) => {
   try {
     const response = await fetch(host.domain + host.reviews, {
       method: "Post",
       headers: {
-        "AuthToken": token,
+        AuthToken: token,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
@@ -40,36 +38,44 @@ export default props => {
       comment: input,
       reviewable_id: props.itemId
     };
-   if(!Utils.isLoggedIn(state)) return alert('Use need to login in before commenting');
+    if (!Utils.isLoggedIn(state))
+      return alert("Use need to login in before commenting");
 
     if (input !== "") {
       apiReviewPost(data, state.authentication.token).then(response => {
-        if(response.status === 'failed')
+        if (response.status === "failed")
           // This is when token expires
-        alert('please logout and log in again');
-        else if (response.status === 'success'){
+          alert("please logout and log in again");
+        else if (response.status === "success") {
           apiGetItems().then(response => {
             dispatch({ type: actions.ITEMS, items: response });
             console.log(state.items);
           });
-          alert(response.status)
+          alert(response.status);
         }
       });
     } else {
       alert("please enter some text");
     }
 
-    setInput('');
-    setOpen(false)
+    setInput("");
+    setOpen(false);
   };
 
   return (
     <Popup
-      on='click'
-      trigger={<Button onClick={()=> setOpen(true)} style={{maxHeight: '2.5em'}} color={'google plus'} content="comment" />}
+      on="click"
+      trigger={
+        <Button
+          onClick={() => setOpen(true)}
+          style={{ maxHeight: "2.5em" }}
+          color={"google plus"}
+          content="comment"
+        />
+      }
       open={open}
       closeOnTriggerBlur
-      position='top center'
+      position="top center"
     >
       <Popup.Header>{input || "Write a quick comment"}</Popup.Header>
       <Popup.Content>
@@ -86,14 +92,20 @@ export default props => {
           required
         />
         {/*<Button onClick={()=> t()} id={'emoji-button'}> Smile</Button>*/}
-         <Divider/>
-          <div style={{display: 'flex', flexDirection: 'row'}}>
-            <Button fluid size='tiny' color={'teal'} onClick={() => createReview()}> Post</Button>
-            <Button color={'teal'} onClick={()=> setOpen(false)}><Icon name='close'/></Button>
-          </div>
-
-
-
+        <Divider />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <Button
+            fluid
+            size="tiny"
+            color={"teal"}
+            onClick={() => createReview()}
+          >
+            Post
+          </Button>
+          <Button color={"red"} onClick={() => setOpen(false)}>
+            <Icon name="close" />
+          </Button>
+        </div>
       </Popup.Content>
     </Popup>
   );

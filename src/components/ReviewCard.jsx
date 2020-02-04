@@ -4,8 +4,9 @@ import ReviewDetail from "./ReviewDetail";
 import QuickReply from "./QuickReply";
 export default props => {
   return (
-    <Popup
-      trigger={
+    // <Popup
+    //     on={'click'}
+    //    trigger={
         // Put this Card inIts on  Component ?
         <Card fluid>
           <Image
@@ -43,12 +44,12 @@ export default props => {
             </div>
           </Card.Content>
         </Card>
-      }
-    >
-      <Popup.Header>User Rating</Popup.Header>
-      <Popup.Content>
-        <Rating icon="star" defaultRating={4} maxRating={5} />
-      </Popup.Content>
-    </Popup>
+    //   }
+    // >
+    //   <Popup.Header>User Rating</Popup.Header>
+    //   <Popup.Content>
+    //     <Rating icon="star" defaultRating={4} maxRating={5} />
+    //   </Popup.Content>
+    // </Popup>
   );
 };
