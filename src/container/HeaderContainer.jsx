@@ -17,9 +17,6 @@ const Nav = () => (
             <li>
                 {/*Authentication*/}
                 <Authentication/>
-
-
-
             </li>
         </ul>
     </nav>

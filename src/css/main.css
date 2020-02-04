@@ -55,7 +55,6 @@ display: flex;
 
 }
 .hero > h1{
-
     font-size:4em;
     color: whitesmoke;
     text-shadow: 0 1px 20px rgba(246, 99, 118, 0.58);
@@ -64,4 +63,47 @@ display: flex;
     font-size:2em;
     color: whitesmoke;
     text-shadow: 0 2px 20px #f66376;
+}
+
+@media screen and (max-width: 1000px) {
+    .hero{
+        text-align: center;
+        text-shadow: 0 5px 1px black;
+    }
+    .hero > h1 {
+        font-size: 3em;
+        text-shadow: 0 1px 1px black;
+    }
+    .hero > p{
+        font-size: 1.5em;
+    }
+    #header{
+        height: 35em;
+        background-image: linear-gradient(90deg, rgba(51, 50, 69, 0.37), rgba(59, 59, 59, 0.51)), url("https://wallpaperaccess.com/full/707636.jpg");
+    }
+
+}
+#mobile-menu-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 3em;
+    box-shadow: 0 4px 20px grey;
+    background: orange;
+}
+#mobile-menu-container > button{
+    background: transparent;
+}
+.logo-image{
+    border-radius: 0 0 2em ;
+    height: 50px;
+    width: 70px;
+    z-index: 0;
+}
+.menu-hide{
+   margin-top: -20em !important;
+   transition: margin-top .4s ease-in-out;
+}
+.menu-show{
+  margin-top: 0 !important;
 }

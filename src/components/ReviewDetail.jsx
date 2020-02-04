@@ -31,10 +31,14 @@ import Utils from "./Utils";
 
 export default props => {
   // const [state, dispatch] = useContext(AppContext);
-  //   const [input, setInput] = useState("");
+   const [open, setOpen] = useState(false);
 
   return (
-    <Modal trigger={<Button style={{maxHeight: '2.5em'}} onClick={() => console.log(props.itemId)}>details</Button>}>
+    <Modal
+        trigger={<Button onClick={()=> setOpen(true)} style={{maxHeight: '2.5em'}} >details</Button>}
+        open={open}
+    >
+
       <Modal.Header>Profile Picture</Modal.Header>
       <Modal.Content image>
         <Image
@@ -54,7 +58,7 @@ export default props => {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button primary>
+        <Button color={'teal'} onClick={() => setOpen(false)} >
           Close <Icon name="right chevron" />
         </Button>
       </Modal.Actions>

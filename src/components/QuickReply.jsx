@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
-import { Button, Input, Popup } from "semantic-ui-react";
+import {Button, Icon, Input, Grid, Popup, Divider} from "semantic-ui-react";
 import Utils from "./Utils";
 
 const { host } = Utils;
@@ -33,7 +33,7 @@ const apiReviewPost = async (data,token) => {
 export default props => {
   const [input, setInput] = useState("");
   const [state, dispatch] = useContext(AppContext);
-
+  const [open, setOpen] = useState(false);
 
   const createReview = () => {
     const data = {
@@ -48,24 +48,27 @@ export default props => {
           // This is when token expires
         alert('please logout and log in again');
         else if (response.status === 'success'){
+          apiGetItems().then(response => {
+            dispatch({ type: actions.ITEMS, items: response });
+            console.log(state.items);
+          });
           alert(response.status)
         }
-        apiGetItems().then(response => {
-          dispatch({ type: actions.ITEMS, items: response });
-          console.log(state.items);
-        });
       });
     } else {
       alert("please enter some text");
     }
 
+    setInput('');
+    setOpen(false)
   };
 
   return (
     <Popup
-      on="click"
-      pinned
-      trigger={<Button style={{maxHeight: '2.5em'}} color={'google plus'} content="comment" />}
+      on='click'
+      trigger={<Button onClick={()=> setOpen(true)} style={{maxHeight: '2.5em'}} color={'google plus'} content="comment" />}
+      open={open}
+      closeOnTriggerBlur
       position='top center'
     >
       <Popup.Header>{input || "Write a quick comment"}</Popup.Header>
@@ -79,10 +82,18 @@ export default props => {
           onChange={e => {
             setInput(e.target.value);
           }}
+          value={input}
           required
         />
         {/*<Button onClick={()=> t()} id={'emoji-button'}> Smile</Button>*/}
-        <Button fluid size='tiny' color={'teal'} onClick={() => createReview()}> Post</Button>
+         <Divider/>
+          <div style={{display: 'flex', flexDirection: 'row'}}>
+            <Button fluid size='tiny' color={'teal'} onClick={() => createReview()}> Post</Button>
+            <Button color={'teal'} onClick={()=> setOpen(false)}><Icon name='close'/></Button>
+          </div>
+
+
+
       </Popup.Content>
     </Popup>
   );
