@@ -8,7 +8,7 @@ export default props => {
     //     on={'click'}
     //    trigger={
         // Put this Card inIts on  Component ?
-        <Card fluid>
+        <Card fluid raised>
           <Image
             src={
               props.image ||

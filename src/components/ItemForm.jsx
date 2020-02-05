@@ -99,7 +99,7 @@ export default () => {
                 placeholder="Category"
                 search
                 searchInput={{ id: "form-select-control-category" }}
-                onChange={e => setCategory(e.target.value)}
+                onChange={(e,{value}) => setCategory(value)}
                 // value={category}
 
               />
