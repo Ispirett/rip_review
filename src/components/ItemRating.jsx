@@ -1,11 +1,11 @@
-import React, {Component, useContext, useReducer, useState} from 'react'
+import React, { useContext, useState} from 'react'
 import { Rating } from 'semantic-ui-react'
 import Utils from "./Utils";
 import {actions, AppContext} from "../container/AppContainer";
-const {host} = Utils
+const {host} = Utils;
 export default (props) => {
 
-  const [state, dispatch] = useContext(AppContext)
+  const [state, dispatch] = useContext(AppContext);
   const [rating, setRating] = useState();
     const apiGetItems = async () => {
         try {
