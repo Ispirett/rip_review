@@ -78,6 +78,7 @@ export default () => {
                         image={item.image}
                         reviewsCount={item.reviewsCount}
                         reviews={item.reviews}
+                        rating={item.rating}
                       />
                       </LazyLoadComponent>
                     </Grid.Column>

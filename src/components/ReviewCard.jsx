@@ -2,6 +2,7 @@ import { Card, Icon, Image, Popup, Rating } from "semantic-ui-react";
 import React from "react";
 import ReviewDetail from "./ReviewDetail";
 import QuickReply from "./QuickReply";
+import ItemRating from "./ItemRating";
 export default props => {
   return (
     // <Popup
@@ -20,6 +21,8 @@ export default props => {
             <Card.Meta>
               <span className="date">posted {props.created_at}</span>
             </Card.Meta>
+              {/*Item rating*/}
+              <ItemRating rating={props.rating} itemId={props.itemId}/>
             <Card.Description>
               {props.description || 'Checkout for more information'}
             </Card.Description>

@@ -6,7 +6,8 @@ export default {
         reviews: '/reviews',
         login:'/auth/login',
         signUp:'/auth/signup',
-        itemCreate: '/items'
+        itemCreate: '/items',
+        ratingCreate:'/ratings'
 
     },
     tokenStore: (() =>{
@@ -30,3 +31,6 @@ export default {
     }
 
 }
+// product
+// https://reviewtt.herokuapp.com
+// http://localhost:3000
