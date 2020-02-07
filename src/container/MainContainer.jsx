@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import MainMenu from "../components/MainMenu";
 import ReviewCard from "../components/ReviewCard";
-import Utils from "../components/Utils";
+import Utils from "../helpers/Utils";
 import {LazyLoadComponent} from 'react-lazy-load-image-component'
 const { host } = Utils;
 
@@ -79,6 +79,7 @@ export default () => {
                         reviewsCount={item.reviewsCount}
                         reviews={item.reviews}
                         rating={item.rating}
+                        user={item.user}
                       />
                       </LazyLoadComponent>
                     </Grid.Column>

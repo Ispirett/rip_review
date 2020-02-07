@@ -1,9 +1,9 @@
-import { Button, Comment, Form, Header,Popup } from "semantic-ui-react";
+import { Button, Comment, Form, Header,Popup, Rating } from "semantic-ui-react";
 import React, {useContext, useEffect, useState} from "react";
 import 'emoji-mart/css/emoji-mart.css'
 import {Picker} from 'emoji-mart'
 import {actions, AppContext} from "../container/AppContainer";
-import Utils from "./Utils";
+import Utils from "../helpers/Utils";
 
 
 const { host } = Utils;
@@ -38,6 +38,9 @@ const UserComment = props => (
       <Comment.Metadata>
         <div>{props.created_at || "Today at 5:42PM"}</div>
       </Comment.Metadata>
+        <Comment.Metadata>
+            <Rating defaultRating={3} maxRating={5} rating={props.rating} disabled />
+        </Comment.Metadata>
       <Comment.Text>{props.comment || "Comment here"}</Comment.Text>
       <Comment.Actions>
         <Comment.Action>Reply</Comment.Action>
@@ -80,6 +83,7 @@ export default props => {
               <UserComment
                 key={index}
                 name={review.user.username}
+                rating={props.user.rating}
                 created_at={review.created_at}
                 comment={review.comment}
               />

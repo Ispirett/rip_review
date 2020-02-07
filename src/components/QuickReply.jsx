@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Icon, Input, Grid, Popup, Divider } from "semantic-ui-react";
-import Utils from "./Utils";
+import Utils from "../helpers/Utils";
 
 const { host } = Utils;
 

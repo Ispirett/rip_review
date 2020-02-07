@@ -9,7 +9,7 @@ import {
 
 } from "semantic-ui-react";
 import {actions, AppContext} from "../container/AppContainer";
-import Utils from "./Utils";
+import Utils from "../helpers/Utils";
 const { host } = Utils;
 const categoryOptions = [
   { key: "business", text: "business", value: "business" },

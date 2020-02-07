@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {actions, AppContext} from "../container/AppContainer";
 import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 import Comments from "./Comments";
-import Utils from "./Utils";
+import Utils from "../helpers/Utils";
 
 // const { host } = Utils;
 
@@ -54,7 +54,7 @@ export default props => {
           <p>{props.description || "Comment to get more details"}</p>
 
           {/*Comments*/}
-          <Comments reviews={props.reviews} itemId={props.itemId} />
+          <Comments user={props.user} reviews={props.reviews} itemId={props.itemId} />
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>

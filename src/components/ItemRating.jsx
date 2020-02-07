@@ -1,10 +1,10 @@
 import React, { useContext, useState} from 'react'
 import { Rating } from 'semantic-ui-react'
-import Utils from "./Utils";
+import Utils from "../helpers/Utils";
 import {actions, AppContext} from "../container/AppContainer";
+import {isLogin} from "../helpers/authentication";
 const {host} = Utils;
 export default (props) => {
-
   const [state, dispatch] = useContext(AppContext);
   const [rating, setRating] = useState();
     const apiGetItems = async () => {
@@ -32,7 +32,11 @@ export default (props) => {
 
         }
   };
-   const handleRate = (e, { rating}) => {
+   const HandleRate = (e, { rating}) => {
+       // isLogin(state);
+       if (!state.authentication.login) {
+           return alert('you need to login to do that :) ')
+       }
        setRating( rating);
         const data = {
            rating:{
@@ -46,8 +50,9 @@ export default (props) => {
                 apiGetItems().then(response => {
                     dispatch({ type: actions.ITEMS, items: response });
                     //console.log(state.items);
+                    alert(response.status)
                 });
-                alert(response.status)
+
 
             }
         })
@@ -56,7 +61,7 @@ export default (props) => {
    };
         return (
             <div>
-                <Rating maxRating={5} rating={props.rating || rating} onRate={handleRate} />
+                <Rating maxRating={5} rating={props.rating || rating} onRate={HandleRate} />
                 {/*<pre>{JSON.stringify(rating, null, 2)}</pre>*/}
             </div>
         )
