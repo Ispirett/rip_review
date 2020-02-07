@@ -1,5 +1,5 @@
 import { Button, Comment, Form, Header,Popup, Rating } from "semantic-ui-react";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import 'emoji-mart/css/emoji-mart.css'
 import {Picker} from 'emoji-mart'
 import {actions, AppContext} from "../container/AppContainer";
