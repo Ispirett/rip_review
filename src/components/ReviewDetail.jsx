@@ -54,7 +54,7 @@ export default props => {
           <p>{props.description || "Comment to get more details"}</p>
 
           {/*Comments*/}
-          <Comments user={props.user} reviews={props.reviews} itemId={props.itemId} />
+          <Comments  reviews={props.reviews} itemId={props.itemId} />
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>

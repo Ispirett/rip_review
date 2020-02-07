@@ -79,7 +79,7 @@ export default () => {
                         reviewsCount={item.reviewsCount}
                         reviews={item.reviews}
                         rating={item.rating}
-                        user={item.user}
+
                       />
                       </LazyLoadComponent>
                     </Grid.Column>
