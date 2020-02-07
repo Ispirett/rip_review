@@ -2,7 +2,7 @@ import React, { useContext, useState} from 'react'
 import { Rating } from 'semantic-ui-react'
 import Utils from "../helpers/Utils";
 import {actions, AppContext} from "../container/AppContainer";
-import {isLogin} from "../helpers/authentication";
+
 const {host} = Utils;
 export default (props) => {
   const [state, dispatch] = useContext(AppContext);
@@ -47,10 +47,10 @@ export default (props) => {
         apiRatingCreate(data, state.authentication.token).then(response =>{
             if(response.status === 'failed') alert(response.msg);
             else {
+                alert(response.status)
                 apiGetItems().then(response => {
                     dispatch({ type: actions.ITEMS, items: response });
                     //console.log(state.items);
-                    alert(response.status)
                 });
 
 

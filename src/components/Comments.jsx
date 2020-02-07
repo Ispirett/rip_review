@@ -80,6 +80,7 @@ export default props => {
         dispatch({ type: actions.ITEMS, items: response });
         //console.log(state.items);
       });
+      setInput('')
     });
   };
 
