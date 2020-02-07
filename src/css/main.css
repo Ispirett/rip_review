@@ -87,17 +87,18 @@ display: flex;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 3em;
+    height: 4em;
     box-shadow: 0 4px 20px grey;
     background: orange;
 }
 #mobile-menu-container > button{
     background: transparent;
     color: white !important;
+    box-shadow: 0 0 5px black;
 }
 .logo-image{
     border-radius: 0 0 2em ;
-    height: 50px;
+    height: 60px;
     width: 70px;
     z-index: 0;
 }
