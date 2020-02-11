@@ -1,40 +1,47 @@
 import _ from 'lodash'
 import faker from 'faker'
-import React, { Component } from 'react'
+import React, {Component, useContext, useReducer, useState} from 'react'
 import { Search, Grid, Header, Segment } from 'semantic-ui-react'
+import {AppContext} from "../container/AppContainer";
 
 const source = _.times(5, () => ({
     title: faker.company.companyName(),
     description: faker.company.catchPhrase(),
     image: faker.internet.avatar(),
     price: faker.finance.amount(0, 100, 2, '$'),
-}))
+}));
 
-const initialState = { isLoading: false, results: [], value: '' }
+// const initialState = { isLoading: false, results: [], value: '' }
 
-export default class NavSearch extends Component {
-    state = initialState
+export default () => {
+    const [state] = useContext(AppContext)
+    const [isLoading, setIsLoading] = useState(false);
+    const [results, setResults] = useState([]);
+    const [newValue, newSetValue] = useState('');
+    // state = initialState
 
-    handleResultSelect = (e, { result }) => this.setState({ value: result.title })
+   const handleResultSelect = (e, { result }) => newSetValue(result.title);
 
-    handleSearchChange = (e, { value }) => {
-        this.setState({ isLoading: true, value })
+   const  handleSearchChange = (e, { value }) => {
+        //this.setState({ isLoading: true, value })
+        setIsLoading(true);
+        newSetValue(value);
 
         setTimeout(() => {
-            if (this.state.value.length < 1) return this.setState(initialState)
+            // if (this.state.value.length < 1) return this.setState(initialState)
 
-            const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+            const re = new RegExp(_.escapeRegExp(newValue), 'i')
             const isMatch = (result) => re.test(result.title)
 
-            this.setState({
-                isLoading: false,
-                results: _.filter(source, isMatch),
-            })
+            // this.setState({
+            //     isLoading: false,
+            //     results: _.filter(source, isMatch),
+            // })
+            setIsLoading(false);
+            setResults(_.filter(state.items, isMatch))
         }, 300)
-    }
+    };
 
-    render() {
-        const { isLoading, value, results } = this.state
 
         return (
             <Grid>
@@ -42,13 +49,13 @@ export default class NavSearch extends Component {
                     <Search
                         input={{ icon: 'search', iconPosition: 'left' }}
                         loading={isLoading}
-                        onResultSelect={this.handleResultSelect}
-                        onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                        onResultSelect={handleResultSelect}
+                        onSearchChange={_.debounce(handleSearchChange, 500, {
                             leading: true,
                         })}
                         results={results}
-                        value={value}
-                        {...this.props}
+                        value={newValue}
+
                     />
                 </Grid.Column>
             {/*    <Grid.Column width={10}>*/}
@@ -65,5 +72,4 @@ export default class NavSearch extends Component {
             {/*    </Grid.Column>*/}
             </Grid>
         )
-    }
 }
