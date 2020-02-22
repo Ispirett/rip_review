@@ -7,9 +7,9 @@ import {
   Image,
   Message,
   Segment,
-    Responsive
+  Divider
 } from "semantic-ui-react";
-import MainMenu from "../components/MainMenu";
+
 import ReviewCard from "../components/ReviewCard";
 import Utils from "../helpers/Utils";
 import {LazyLoadComponent} from 'react-lazy-load-image-component'
@@ -41,7 +41,7 @@ export default () => {
     apiGetItems().then(response => {
       dispatch({ type: actions.ITEMS, items: response });
       setLoading(false);
-      console.log(state.items);
+      // console.log(state.items);
     });
   }, []);
 
@@ -55,7 +55,10 @@ export default () => {
     );
   } else console.log(state.items);
   return (
-    <div style={{ width: "80%", margin: "auto" }}>
+    <div className={'wrapper'}>
+
+      <h1>Active Reviews</h1>
+      <Divider/>
       <Grid stackable doubling>
         <Grid.Row>
             {/*<GridColumn width={3} >*/}

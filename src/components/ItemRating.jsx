@@ -6,7 +6,7 @@ import {actions, AppContext} from "../container/AppContainer";
 const {host} = Utils;
 export default (props) => {
   const [state, dispatch] = useContext(AppContext);
-  const [rating, setRating] = useState();
+  const [rating, setRating] = useState(0);
     const apiGetItems = async () => {
         try {
             let response = await fetch(host.domain + host.allItems);

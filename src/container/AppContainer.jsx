@@ -2,6 +2,7 @@ import React,{useReducer, createContext} from "react";
 import Utils from "../helpers/Utils";
 const initState = {
     items: [],
+    topRated:[],
     authentication:{
         token: Utils.tokenStore.get() || '',
         login: Utils.tokenStore.get() ? true: false,
@@ -11,7 +12,8 @@ const actions = {
     ITEMS: 'ITEMS',
     AUTH: 'AUTH',
     LOGOUT: 'LOGOUT',
-    UPDATE_ITEMS: 'UPDATE_ITEMS'
+    UPDATE_ITEMS: 'UPDATE_ITEMS',
+    TOP_RATED: 'TOP_RATED'
 };
 const AppContext = createContext(initState);
 const reducer = (state, action) =>{
@@ -26,6 +28,11 @@ const reducer = (state, action) =>{
                 ...state,
                 items: state.items.concat(action.item)
             };
+        case actions.TOP_RATED:
+            return {
+                ...state,
+                topRated:action.topRated
+            }
         case actions.AUTH:
            Utils.tokenStore.store(action.token);
             return {

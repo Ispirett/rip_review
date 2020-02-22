@@ -7,7 +7,8 @@ export default {
         login:'/auth/login',
         signUp:'/auth/signup',
         itemCreate: '/items',
-        ratingCreate:'/ratings'
+        ratingCreate:'/ratings',
+        topRated: '/top_rated'
 
     },
     tokenStore: (() =>{

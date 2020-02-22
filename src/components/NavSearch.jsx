@@ -3,6 +3,7 @@ import faker from 'faker'
 import React, {Component, useContext, useReducer, useState} from 'react'
 import { Search, Grid, Header, Segment } from 'semantic-ui-react'
 import {AppContext} from "../container/AppContainer";
+import ReviewDetail from "./ReviewDetail";
 
 const source = _.times(5, () => ({
     title: faker.company.companyName(),
@@ -14,13 +15,17 @@ const source = _.times(5, () => ({
 // const initialState = { isLoading: false, results: [], value: '' }
 
 export default () => {
-    const [state] = useContext(AppContext)
+    const [state, dispatch] = useContext(AppContext)
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState([]);
     const [newValue, newSetValue] = useState('');
     // state = initialState
 
-   const handleResultSelect = (e, { result }) => newSetValue(result.title);
+   const handleResultSelect = (e, { result }) =>{
+       newSetValue(result.title);
+        //alert(result.title);
+
+   };
 
    const  handleSearchChange = (e, { value }) => {
         //this.setState({ isLoading: true, value })
@@ -38,7 +43,8 @@ export default () => {
             //     results: _.filter(source, isMatch),
             // })
             setIsLoading(false);
-            setResults(_.filter(state.items, isMatch))
+            setResults(_.filter(state.items, isMatch));
+            dispatch({items: _.filter(results, isMatch)})
         }, 300)
     };
 

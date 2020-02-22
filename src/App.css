@@ -41,6 +41,22 @@
   }
 }
 
+.wrapper{
+  width: 80%;
+  margin: 0 auto 4em
+
+}
 .emoji-picker{
   z-index: 2 !important;
+}
+
+.top-rated-container{
+  box-shadow: 0 1px 20px -2px lightgray;
+
+}
+
+@media screen and (max-width: 768px) {
+  .top-rated{
+    width: 100% !important;
+  }
 }
