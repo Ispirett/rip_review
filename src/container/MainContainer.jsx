@@ -68,7 +68,7 @@ export default () => {
 
           <GridColumn >
 
-            <Grid columns='four' stackable doubling >
+            <Grid columns='five' stackable doubling >
               <Grid.Row >
                 {state.items.map((item, index) => {
                   return (

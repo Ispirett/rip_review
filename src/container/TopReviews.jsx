@@ -36,7 +36,7 @@ const TopReviews = () => {
               key={index}
               image={item.image}
               color={item.rating <3 ? "red" : "green"}
-              content={item.rating <3 ? "good":"bad"}
+              content={item.rating <3 ? "bad":"good"}
             />
           );
         })}
