@@ -36,6 +36,7 @@ const TopReviews = () => {
               key={index}
               image={item.image}
               color={item.rating <3 ? "red" : "green"}
+              content={item.rating <3 ? "good":"bad"}
             />
           );
         })}
@@ -56,7 +57,7 @@ const TopItem = props => {
         label={{
           as: "a",
           color: props.color,
-          content: "Worst Review",
+          content: props.content,
           icon: "spoon",
           ribbon: true
         }}
