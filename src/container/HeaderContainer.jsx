@@ -1,18 +1,18 @@
-import React, {useContext} from "react";
-import {Button,Popup,Form,Input,Icon, Responsive} from "semantic-ui-react";
+import React from "react";
+import {Icon, Responsive, Label, Menu} from "semantic-ui-react";
 import '../css/main.css'
 import NavSearch from "../components/NavSearch";
 import Authentication from "../components/Authentication";
 import ItemForm from "../components/ItemForm";
 import MobileMenu from "../components/MobileMenu";
+import HelpModal from "../components/help/HelpModal";
 const Nav = () => (
     <nav id={'nav'}>
         <div id={'search'}>
             <NavSearch/>
         </div>
         <ul className={'nav-ul'}>
-            <li>Home</li>
-            <li >About</li>
+            <li><MenuActions/></li>
             <li><ItemForm/></li>
             <li>
                 {/*Authentication*/}
@@ -38,3 +38,25 @@ export default () =>(
         </section>
     </header>
 )
+
+const MenuActions = () => (
+    <Menu compact>
+        <Menu.Item as='a'>
+            <Icon name='bell' /> Notifications
+            <Label color='teal' floating>
+                22
+            </Label>
+        </Menu.Item>
+
+        <HelpModal trigger={
+            <Menu.Item as='a'>
+                <Icon name='help' /> Help
+                {/*<Label color='red' flo   ating>*/}
+                {/*    22*/}
+                {/*</Label>*/}
+            </Menu.Item>
+        }/>
+
+    </Menu>
+)
+

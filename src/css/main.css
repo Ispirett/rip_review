@@ -29,8 +29,10 @@ display: flex;
     width: 25rem;
 }
 .nav-ul{
-
-    width: 30rem;
+    background: rgba(0, 0, 0, 0.19);
+    padding: 1em;
+    border-radius: .5em;
+    width: 38rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
