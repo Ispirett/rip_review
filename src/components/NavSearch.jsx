@@ -3,7 +3,7 @@ import faker from 'faker'
 import React, {Component, useContext, useReducer, useState} from 'react'
 import { Search, Grid, Header, Segment } from 'semantic-ui-react'
 import {AppContext} from "../container/AppContainer";
-import ReviewDetail from "./ReviewDetail";
+import ReviewDetail from "./item/ReviewDetail";
 
 const source = _.times(5, () => ({
     title: faker.company.companyName(),

@@ -3,7 +3,7 @@ import {Icon, Responsive, Label, Menu} from "semantic-ui-react";
 import '../css/main.css'
 import NavSearch from "../components/NavSearch";
 import Authentication from "../components/Authentication";
-import ItemForm from "../components/ItemForm";
+import ItemForm from "../components/item/ItemForm";
 import MobileMenu from "../components/MobileMenu";
 import HelpModal from "../components/help/HelpModal";
 const Nav = () => (

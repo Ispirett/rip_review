@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react'
 import {Button, Icon, Input, Menu} from 'semantic-ui-react'
 import Authentication from "./Authentication";
-import ItemForm from "./ItemForm";
+import ItemForm from "./item/ItemForm";
 import NavSearch from "./NavSearch";
 import logo from '../img/logo.png'
 export default () => {

@@ -53,7 +53,6 @@ const TopItem = props => {
       <Image
         className={'top-rated'}
         fluid
-        size={"large"}
         label={{
           as: "a",
           color: props.color,

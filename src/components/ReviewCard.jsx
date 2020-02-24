@@ -1,22 +1,12 @@
 import { Card, Icon, Image, Popup, Rating } from "semantic-ui-react";
 import React from "react";
-import ReviewDetail from "./ReviewDetail";
+import ReviewDetail from "./item/ReviewDetail";
 import QuickReply from "./QuickReply";
 import ItemRating from "./ItemRating";
+import StringFormat from "../helpers/StringFormat";
+
 export default props => {
-    const trucate = (description, value) => {
-        if (description.length > 100){
-         return description.slice(1,101) + '.....'
-        }
-        else{
-            return  description
-        }
-    };
   return (
-    // <Popup
-    //     on={'click'}
-    //    trigger={
-        // Put this Card inIts on  Component ?
         <Card fluid raised>
           <Image
             src={
@@ -25,14 +15,14 @@ export default props => {
             }
           />
           <Card.Content>
-            <Card.Header>{props.title || "title"}</Card.Header>
+            <Card.Header>{StringFormat.truncate(props.title,20) || "title"}</Card.Header>
             <Card.Meta>
               <span className="date">posted {props.created_at}</span>
             </Card.Meta>
               {/*Item rating*/}
               <ItemRating rating={props.rating} itemId={props.itemId}/>
             <Card.Description>
-              {trucate(props.description, 100) || 'Checkout for more information'}
+              {StringFormat.truncate(props.description, 100) || 'Checkout for more information'}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
@@ -55,12 +45,5 @@ export default props => {
             </div>
           </Card.Content>
         </Card>
-    //   }
-    // >
-    //   <Popup.Header>User Rating</Popup.Header>
-    //   <Popup.Content>
-    //     <Rating icon="star" defaultRating={4} maxRating={5} />
-    //   </Popup.Content>
-    // </Popup>
   );
 };

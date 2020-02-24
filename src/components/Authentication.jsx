@@ -103,7 +103,7 @@ export default () => {
 
           <Popup.Header>Sign In</Popup.Header>
           <Popup.Content>
-            <Form onSubmit={e => handleLogin(e)}>
+            <Form widths warning success onSubmit={e => handleLogin(e)}>
               <Form.Field
                 id="form-input-control-error-email"
                 control={Input}
@@ -143,10 +143,11 @@ export default () => {
             </Button>
           }
           position="bottom right"
+
         >
           <Popup.Header>Become a Member</Popup.Header>
-          <Popup.Content>
-            <Form onSubmit={(e) => handleSignUp(e)}>
+          <Popup.Content >
+            <Form warning success widths  onSubmit={(e) => handleSignUp(e)}>
               <Form.Group widths="equal">
                 <Form.Field
                   id="form-input-control-first-name"
