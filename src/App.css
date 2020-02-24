@@ -52,8 +52,13 @@
 
 .top-rated-container{
   box-shadow: 0 1px 20px -2px lightgray;
-
 }
+
+.top-rated > img{
+  height: 15em !important;
+}
+
+
 
 @media screen and (max-width: 768px) {
   .top-rated{
