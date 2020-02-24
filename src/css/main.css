@@ -1,6 +1,4 @@
-:root{
 
-}
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 .text_color-primary{
     color: #5469d4;
@@ -112,6 +110,6 @@ display: flex;
   margin-top: 0 !important;
 }
 
-.card_image{
-
+.card >img{
+    height: 15em;
 }

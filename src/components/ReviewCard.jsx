@@ -4,6 +4,14 @@ import ReviewDetail from "./ReviewDetail";
 import QuickReply from "./QuickReply";
 import ItemRating from "./ItemRating";
 export default props => {
+    const trucate = (description, value) => {
+        if (description.length > 100){
+         return description.slice(1,101) + '.....'
+        }
+        else{
+            return  description
+        }
+    };
   return (
     // <Popup
     //     on={'click'}
@@ -24,7 +32,7 @@ export default props => {
               {/*Item rating*/}
               <ItemRating rating={props.rating} itemId={props.itemId}/>
             <Card.Description>
-              {props.description || 'Checkout for more information'}
+              {trucate(props.description, 100) || 'Checkout for more information'}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>

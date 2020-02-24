@@ -24,7 +24,7 @@ const TopReviews = () => {
       console.log(response);
       dispatch({ type: actions.TOP_RATED, topRated: response });
     });
-  });
+  },[]);
   return (
     <div className={"wrapper"} >
       <h1>Top Reviews</h1>
