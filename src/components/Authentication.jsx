@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Form, Icon, Input, Popup} from "semantic-ui-react";
 import Utils from "../helpers/Utils";
+import MessageUi from "./messages/message";
 const { host} = Utils;
 
 
@@ -54,6 +55,7 @@ export default () => {
       if(response.status === 'success') {
           alert(response.status);
           dispatch({type: actions.AUTH, token: response.token});
+
       }
       else if(response.status === 'failed'){
       alert(response.msg)
@@ -62,7 +64,7 @@ export default () => {
   };
 
   const handleSignUp = (e) =>{
-      e.preventDefault()
+      e.preventDefault();
       const data = {
          user:{ email: email,
           password: password,
