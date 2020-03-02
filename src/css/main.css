@@ -113,3 +113,9 @@ display: flex;
 .card >img{
     height: 15em;
 }
+.message{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    box-shadow: 0 4px 20px darkgrey ;
+}

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Icon, Input, Grid, Popup, Divider } from "semantic-ui-react";
 import Utils from "../helpers/Utils";
+import message from "./messages/message";
 
 const { host } = Utils;
 
@@ -39,23 +40,34 @@ export default props => {
       reviewable_id: props.itemId
     };
     if (!Utils.isLoggedIn(state))
-      return alert("Use need to login in before commenting");
-
-    if (input !== "") {
+      message({
+        title: "Oops!",
+        message: "you need to login in before commenting"
+      });
+    else if (input !== "") {
       apiReviewPost(data, state.authentication.token).then(response => {
-        if (response.status === "failed")
+        if (response.status === "failed") {
           // This is when token expires
-          alert("please logout and log in again");
-        else if (response.status === "success") {
+          message({
+            title: "Oops!",
+            message: "please logout and log in again"
+          });
+        } else if (response.status === "success") {
           apiGetItems().then(response => {
             dispatch({ type: actions.ITEMS, items: response });
-            console.log(state.items);
           });
-          alert(response.status);
+
+          message({
+            title: "Success",
+            message: "Your message was created"
+          });
         }
       });
     } else {
-      alert("please enter some text");
+      message({
+        title: "Oops!",
+        message: "please enter some text"
+      });
     }
 
     setInput("");

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { actions, AppContext } from "../container/AppContainer";
 import { Button, Form, Icon, Input, Popup} from "semantic-ui-react";
 import Utils from "../helpers/Utils";
-import MessageUi from "./messages/message";
+import message from "./messages/message";
 const { host} = Utils;
 
 
@@ -53,12 +53,19 @@ export default () => {
     };
     apiLogin(data).then(response => {
       if(response.status === 'success') {
-          alert(response.status);
+          // alert(response.status);
+          message({
+              title: 'Login Success',
+              message: 'you are logged in!'
+          });
           dispatch({type: actions.AUTH, token: response.token});
 
       }
       else if(response.status === 'failed'){
-      alert(response.msg)
+          message({
+              title: 'Login Failed',
+              message: response.msg
+          });
       }
     });
   };
@@ -105,7 +112,7 @@ export default () => {
 
           <Popup.Header>Sign In</Popup.Header>
           <Popup.Content>
-            <Form widths warning success onSubmit={e => handleLogin(e)}>
+            <Form width warning success onSubmit={e => handleLogin(e)}>
               <Form.Field
                 id="form-input-control-error-email"
                 control={Input}
@@ -149,7 +156,7 @@ export default () => {
         >
           <Popup.Header>Become a Member</Popup.Header>
           <Popup.Content >
-            <Form warning success widths  onSubmit={(e) => handleSignUp(e)}>
+            <Form warning success width  onSubmit={(e) => handleSignUp(e)}>
               <Form.Group widths="equal">
                 <Form.Field
                   id="form-input-control-first-name"

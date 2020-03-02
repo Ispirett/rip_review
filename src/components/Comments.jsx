@@ -12,6 +12,7 @@ import { Picker } from "emoji-mart";
 import { actions, AppContext } from "../container/AppContainer";
 import Utils from "../helpers/Utils";
 import CommentSettings from "./CommentSettings";
+import message from "./messages/message";
 
 const { host } = Utils;
 const apiGetItems = async () => {
@@ -68,14 +69,21 @@ export default props => {
 
   const createReview = () => {
     if (!Utils.isLoggedIn(state))
-      return alert("Use need to login in before commenting");
+
+      message({
+          title: 'Oops!',
+          message: "you need to login in before commenting"
+      });
     const data = {
       comment: input,
       reviewable_id: props.itemId
     };
 
     apiReviewPost(data, state.authentication.token).then(response => {
-      alert(response.status);
+        message({
+            title: 'Oops!',
+            message: response.status
+        });
       apiGetItems().then(response => {
         dispatch({ type: actions.ITEMS, items: response });
         //console.log(state.items);
