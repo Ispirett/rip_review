@@ -82,7 +82,7 @@ export default props => {
     apiReviewPost(data, state.authentication.token).then(response => {
         message({
             title: 'Oops!',
-            message: response.status
+            message: "You need to be logged in before continuing!"
         });
       apiGetItems().then(response => {
         dispatch({ type: actions.ITEMS, items: response });

@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from "react";
-import {actions, AppContext} from "../../container/AppContainer";
+import React, { useContext, useEffect, useState } from "react";
+import { actions, AppContext } from "../../container/AppContainer";
 import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 import Comments from "../Comments";
 import Utils from "../../helpers/Utils";
@@ -28,17 +28,19 @@ import Utils from "../../helpers/Utils";
 //     } catch (e) {}
 // };
 
-
 export default props => {
   // const [state, dispatch] = useContext(AppContext);
-   const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Modal
-        trigger={<Button onClick={()=> setOpen(true)} style={{maxHeight: '2.5em'}} >details</Button>}
-        open={open}
+      trigger={
+        <Button onClick={() => setOpen(true)} style={{ maxHeight: "2.5em" }}>
+          details
+        </Button>
+      }
+      open={open}
     >
-
       <Modal.Header>Profile Picture</Modal.Header>
       <Modal.Content image>
         <Image
@@ -54,11 +56,11 @@ export default props => {
           <p>{props.description || "Comment to get more details"}</p>
 
           {/*Comments*/}
-          <Comments  reviews={props.reviews} itemId={props.itemId} />
+          <Comments reviews={props.reviews} itemId={props.itemId} />
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button color={'teal'} onClick={() => setOpen(false)} >
+        <Button color={"teal"} onClick={() => setOpen(false)}>
           Close <Icon name="right chevron" />
         </Button>
       </Modal.Actions>
