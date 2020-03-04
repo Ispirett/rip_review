@@ -2,6 +2,7 @@ import React, { useContext, useState} from 'react'
 import { Rating } from 'semantic-ui-react'
 import Utils from "../helpers/Utils";
 import {actions, AppContext} from "../container/AppContainer";
+import message from "./messages/message";
 
 const {host} = Utils;
 export default (props) => {
@@ -35,7 +36,10 @@ export default (props) => {
    const HandleRate = (e, { rating}) => {
        // isLogin(state);
        if (!state.authentication.login) {
-           return alert('you need to login to do that :) ')
+           message({
+               title:'Rating',
+               message: 'you need to login to do that :) '
+           });
        }
        setRating( rating);
         const data = {
@@ -45,9 +49,15 @@ export default (props) => {
            }
         };
         apiRatingCreate(data, state.authentication.token).then(response =>{
-            if(response.status === 'failed') alert(response.msg);
+            if(response.status === 'failed') message({
+                title:'Review',
+                message:response.msg
+            })
             else {
-                alert(response.status)
+                message({
+                    title:'Rating',
+                    message:response.status
+                });
                 apiGetItems().then(response => {
                     dispatch({ type: actions.ITEMS, items: response });
                     //console.log(state.items);

@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import {actions, AppContext} from "../../container/AppContainer";
 import Utils from "../../helpers/Utils";
+import message from "../messages/message";
 const { host } = Utils;
 const categoryOptions = [
   { key: "business", text: "business", value: "business" },
@@ -56,13 +57,19 @@ export default () => {
 
         console.table(data);
         apiItemCreate(data, state.authentication.token).then(response => {
-            if(response.status === 'failed')
-                alert(response.msg)
+            if(response.status === 'failed') {
+                message(
+                    {title:'Item',
+                          message: response.msg
+                })
+            }
             else if(response.status === 'success'){
-                console.log(response.item)
-                dispatch({type:actions.UPDATE_ITEMS,item:response.item})
+                dispatch({type:actions.UPDATE_ITEMS,item:response.item});
                 setOpen(false);
-                alert('saved successfully')
+                message(
+                    {title:'Item',
+                        message: "saved successfully"
+                    })
             }
         });
 
