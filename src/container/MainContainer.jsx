@@ -24,16 +24,6 @@ const apiGetItems = async () => {
   }
 };
 
-const Notfication = () => (
-  <Message>
-    <Message.Header>Changes in Service</Message.Header>
-    <p>
-      We updated our privacy policy here to better service our customers. We
-      recommend reviewing the changes.
-    </p>
-  </Message>
-);
-
 export default () => {
   const [state, dispatch] = useContext(AppContext);
   const [loading, setLoading] = useState(true);

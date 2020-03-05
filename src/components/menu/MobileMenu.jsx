@@ -1,9 +1,9 @@
 import React, {Component, useState} from 'react'
 import {Button, Icon, Input, Menu} from 'semantic-ui-react'
-import Authentication from "./Authentication";
-import ItemForm from "./item/ItemForm";
+import Authentication from "../Authentication";
+import ItemForm from "../item/ItemForm";
 import NavSearch from "./NavSearch";
-import logo from '../img/logo.png'
+import logo from '../../img/logo.png'
 export default () => {
     const handleMenuSate = () =>{
        const menu = document.getElementById('mobile-menu')

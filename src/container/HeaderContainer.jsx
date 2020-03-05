@@ -1,11 +1,12 @@
 import React from "react";
-import {Icon, Responsive, Label, Menu} from "semantic-ui-react";
+import {Icon, Responsive, Label, Menu, Popup} from "semantic-ui-react";
 import '../css/main.css'
-import NavSearch from "../components/NavSearch";
+import NavSearch from "../components/menu/NavSearch";
 import Authentication from "../components/Authentication";
 import ItemForm from "../components/item/ItemForm";
-import MobileMenu from "../components/MobileMenu";
-import HelpModal from "../components/help/HelpModal";
+import MobileMenu from "../components/menu/MobileMenu";
+import MenuActions from "../components/menu/MenuActions";
+
 const Nav = () => (
     <nav id={'nav'}>
         <div id={'search'}>
@@ -20,7 +21,7 @@ const Nav = () => (
             </li>
         </ul>
     </nav>
-)
+);
 
 
 
@@ -33,30 +34,10 @@ export default () =>(
             <MobileMenu/>
         </Responsive>
         <section className={'hero'}>
-            <h1>Ultimate Review Platform</h1>
+             <h1>Rip Review</h1>
             <p>Perpetuating Change</p>
+            <p>review whatever you want!</p>
         </section>
     </header>
-)
-
-const MenuActions = () => (
-    <Menu compact>
-        <Menu.Item as='a'>
-            <Icon name='bell' /> Notifications
-            <Label color='teal' floating>
-                22
-            </Label>
-        </Menu.Item>
-
-        <HelpModal trigger={
-            <Menu.Item as='a'>
-                <Icon name='help' /> Help
-                {/*<Label color='red' flo   ating>*/}
-                {/*    22*/}
-                {/*</Label>*/}
-            </Menu.Item>
-        }/>
-
-    </Menu>
 )
 
