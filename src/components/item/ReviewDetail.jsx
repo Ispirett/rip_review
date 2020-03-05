@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { actions, AppContext } from "../../container/AppContainer";
+import React, { useState } from "react";
+// import { actions, AppContext } from "../../container/AppContainer";
 import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 import Comments from "../Comments";
-import Utils from "../../helpers/Utils";
+// import Utils from "../../helpers/Utils";
 
 // const { host } = Utils;
 

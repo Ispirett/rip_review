@@ -1,5 +1,5 @@
 import React from "react";
-import {Icon, Responsive, Label, Menu, Popup} from "semantic-ui-react";
+import {Responsive} from "semantic-ui-react";
 import '../css/main.css'
 import NavSearch from "../components/menu/NavSearch";
 import Authentication from "../components/Authentication";

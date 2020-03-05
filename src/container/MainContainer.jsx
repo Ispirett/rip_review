@@ -5,7 +5,6 @@ import {
   Grid,
   GridColumn,
   Image,
-  Message,
   Segment,
   Divider
 } from "semantic-ui-react";
@@ -13,7 +12,10 @@ import {
 import ReviewCard from "../components/ReviewCard";
 import Utils from "../helpers/Utils";
 import {LazyLoadComponent} from 'react-lazy-load-image-component'
+
+
 const { host } = Utils;
+
 
 const apiGetItems = async () => {
   try {

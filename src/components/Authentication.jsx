@@ -3,6 +3,7 @@ import { actions, AppContext } from "../container/AppContainer";
 import { Button, Form, Icon, Input, Popup} from "semantic-ui-react";
 import Utils from "../helpers/Utils";
 import message from "./messages/message";
+import ReactGA from 'react-ga'
 const { host} = Utils;
 
 
@@ -58,7 +59,15 @@ export default () => {
               title: 'Login Success',
               message: 'you are logged in!'
           });
-          dispatch({type: actions.AUTH, token: response.token});
+          dispatch({type: actions.AUTH, token: response.token, user:response.user});
+          // set for google a
+          ReactGA.set({
+            user: response.user.username
+          });
+          ReactGA.event({
+              category: "Sign In",
+              action: `user ${response.user.username} just signed up`,
+          });
 
       }
       else if(response.status === 'failed'){
@@ -81,9 +90,21 @@ export default () => {
       apiSignUp(data).then(response =>{
           if (response.status === 'success') {
               dispatch({type: actions.AUTH, token: response.token})
+              message({
+                  title: 'Sign UP Successful',
+                  message: `Welcome ${response.user.username}!`
+              });
+              // google
+              ReactGA.event({
+                  category: "Sign Up",
+                  action: `user ${data.user.username} just signed up`,
+              });
           }
           else if(response.status === 'failed'){
-              alert(response.msg)
+              message({
+                  title: 'Sign Up Failed',
+                  message: response.msg
+              });
           }
 
       })

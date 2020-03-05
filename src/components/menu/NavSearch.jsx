@@ -1,9 +1,8 @@
 import _ from 'lodash'
 import faker from 'faker'
-import React, {Component, useContext, useReducer, useState} from 'react'
-import { Search, Grid, Header, Segment } from 'semantic-ui-react'
+import React, {useContext,useState} from 'react'
+import { Search, Grid} from 'semantic-ui-react'
 import {AppContext} from "../../container/AppContainer";
-import ReviewDetail from "../item/ReviewDetail";
 
 const source = _.times(5, () => ({
     title: faker.company.companyName(),

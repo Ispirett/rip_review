@@ -3,6 +3,7 @@ import Utils from "../helpers/Utils";
 const initState = {
     items: [],
     topRated:[],
+    user:null,
     authentication:{
         token: Utils.tokenStore.get() || '',
         login: Utils.tokenStore.get() ? true: false,
@@ -39,7 +40,8 @@ const reducer = (state, action) =>{
                 ...state,
                 authentication: {
                    token: action.token,
-                    login: action.token !== undefined ? true: false
+                    login: action.token !== undefined ? true: false,
+                    user: action.user
                 }
             };
         case actions.LOGOUT:
