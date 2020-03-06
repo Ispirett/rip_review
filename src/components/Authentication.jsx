@@ -178,7 +178,7 @@ export default () => {
           <Popup.Header>Become a Member</Popup.Header>
           <Popup.Content >
             <Form warning success width  onSubmit={(e) => handleSignUp(e)}>
-              <Form.Group widths="equal">
+              <Form.Group width="equal">
                 <Form.Field
                   id="form-input-control-first-name"
                   control={Input}

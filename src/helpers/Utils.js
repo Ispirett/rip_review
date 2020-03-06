@@ -1,3 +1,4 @@
+import ReactGA from "react-ga";
 export default {
     host:{
         domain: "https://reviewtt.herokuapp.com/api",
@@ -14,11 +15,15 @@ export default {
     tokenStore: (() =>{
         const store = (token) =>{
             return localStorage.setItem('token', token || '' )
-        }
+        };
         const get =  ()=>{
             if(localStorage.getItem('token') === null) return false;
             else{
-               return  localStorage.getItem('token')
+                const token = localStorage.getItem('token');
+                ReactGA.set({
+                user_id: "username"
+                });
+               return  token
             }
 
         }

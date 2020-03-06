@@ -9,6 +9,7 @@ import TopReviews from "./container/TopReviews";
 import ReactGA from "react-ga";
 const trackingId = "UA-159879631-1";
 ReactGA.initialize(trackingId);
+ReactGA.pageview(document.location.host);
 
 function App() {
 return(

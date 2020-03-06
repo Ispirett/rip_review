@@ -93,7 +93,7 @@ export default () => {
                     }
                 />
                 <Modal.Description>
-                    <Form warning success widths onSubmit={(e) => handleSubmit(e)}>
+                    <Form warning success  onSubmit={(e) => handleSubmit(e)}>
                         <Form.Group widths="equal">
                             <Form.Field
                                 id="form-input-control-first-name"
