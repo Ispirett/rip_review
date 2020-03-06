@@ -6,7 +6,7 @@ import {
   GridColumn,
   Image,
   Segment,
-  Divider
+  Divider, Responsive
 } from "semantic-ui-react";
 
 import ReviewCard from "../components/ReviewCard";
@@ -59,61 +59,63 @@ export default () => {
             {/*</GridColumn>*/}
 
           <GridColumn >
+            {/*Large screens*/}
+            <Responsive minWidth={1350}>
+              <Grid columns='five' stackable doubling >
+                <Grid.Row >
+                  {state.items.map((item, index) => {
+                    return (
+                        <Grid.Column key={index} style={{ marginBottom: "2em" }} >
+                          <LazyLoadComponent>
+                            <ReviewCard
+                                itemId={item.id}
+                                title={item.title}
+                                description={item.description}
+                                created_at={item.created_at}
+                                image={item.image}
+                                reviewsCount={item.reviewsCount}
+                                reviews={item.reviews}
+                                rating={item.rating}
 
-            <Grid columns='five' stackable doubling >
-              <Grid.Row >
-                {state.items.map((item, index) => {
-                  return (
-                    <Grid.Column key={index} style={{ marginBottom: "2em" }} >
-                      <LazyLoadComponent>
-                      <ReviewCard
-                        itemId={item.id}
-                        title={item.title}
-                        description={item.description}
-                        created_at={item.created_at}
-                        image={item.image}
-                        reviewsCount={item.reviewsCount}
-                        reviews={item.reviews}
-                        rating={item.rating}
+                            />
+                          </LazyLoadComponent>
+                        </Grid.Column>
 
-                      />
-                      </LazyLoadComponent>
-                    </Grid.Column>
+                    );
+                  })}
+                </Grid.Row>
+              </Grid>
+            </Responsive>
+            {/*..............*/}
 
-                  );
-                })}
-              </Grid.Row>
+            {/*Small screens*/}
+            <Responsive maxWidth={1350}>
+              <Grid columns='three' stackable doubling >
+                <Grid.Row >
+                  {state.items.map((item, index) => {
+                    return (
+                        <Grid.Column key={index} style={{ marginBottom: "2em" }} >
+                          <LazyLoadComponent>
+                            <ReviewCard
+                                itemId={item.id}
+                                title={item.title}
+                                description={item.description}
+                                created_at={item.created_at}
+                                image={item.image}
+                                reviewsCount={item.reviewsCount}
+                                reviews={item.reviews}
+                                rating={item.rating}
 
-              {/*<Grid.Row columns={4}>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*</Grid.Row>*/}
+                            />
+                          </LazyLoadComponent>
+                        </Grid.Column>
 
-              {/*<Grid.Row columns={4}>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*  <Grid.Column>*/}
-              {/*    <ReviewCard />*/}
-              {/*  </Grid.Column>*/}
-              {/*</Grid.Row>*/}
-            </Grid>
+                    );
+                  })}
+                </Grid.Row>
+              </Grid>
+            </Responsive>
+
           </GridColumn>
         </Grid.Row>
       </Grid>

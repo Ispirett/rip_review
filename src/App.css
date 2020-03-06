@@ -65,6 +65,17 @@
   display: block;
 }
 
+@media screen and (max-width:1700px ){
+  .wrapper{
+    width: 95%;
+  }
+}
+@media screen and (max-width:1700px ){
+  .wrapper{
+    width: 98%;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .top-rated{
