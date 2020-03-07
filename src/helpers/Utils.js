@@ -1,15 +1,16 @@
 import ReactGA from "react-ga";
 export default {
     host:{
-        domain: "https://reviewtt.herokuapp.com/api",
-        main:'https://reviewtt.herokuapp.com',
+        domain: "http://localhost:4000/api",
+        main:'http://localhost:4000',
         allItems: "/items",
         reviews: '/reviews',
         login:'/auth/login',
         signUp:'/auth/signup',
         itemCreate: '/items',
         ratingCreate:'/ratings',
-        topRated: '/top_rated'
+        topRated: '/top_rated',
+        notification: '/notifications'
 
     },
     tokenStore: (() =>{
