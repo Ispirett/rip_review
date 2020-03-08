@@ -1,7 +1,7 @@
 import ReactGA from "react-ga";
 export default {
     host:{
-        domain: "http://https://reviewtt.herokuapp.com/api",
+        domain: "https://reviewtt.herokuapp.com/api",
         main:'https://reviewtt.herokuapp.com',
         allItems: "/items",
         reviews: '/reviews',
