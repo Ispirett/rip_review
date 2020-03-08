@@ -27,7 +27,7 @@ export default class HelpInformation extends Component {
                 </Accordion.Title>
                 <Accordion.Content active={activeIndex === 0}>
                     <p>
-                       1: Register a new account by click on th Sign Up button and filling out the form.
+                       1: Register a new account by clicking on th Sign Up button and filling out the form.
                        2: Sign in with your email and password.
                     </p>
                 </Accordion.Content>
@@ -42,9 +42,9 @@ export default class HelpInformation extends Component {
                 </Accordion.Title>
                 <Accordion.Content active={activeIndex === 1}>
                     <p>
-                       Click on the a value from 1-5 on the item you want to review.
+                       Click a value from 1-5 on the star icon of the item you want to review.
                        The value you click with be your rating for that item.
-                       You rating is show on your comment for that review.
+                       Your rating is shown on your comments for that review.
                     </p>
                 </Accordion.Content>
 
