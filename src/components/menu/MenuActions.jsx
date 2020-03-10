@@ -24,10 +24,13 @@ export default  () => {
     const [state] = useContext(AppContext);
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
+        // show notification if logged in.
+        if(state.authentication.login)
         apiGetNotification(state.authentication.token).then(response => {
-            console.log(response)
+            console.log(response);
             setNotifications(response)
         })
+
     }, []);
     return <Menu compact>
         <Popup trigger={
