@@ -7,6 +7,12 @@
     background: #5469d4 !important;
     color: white !important;
 }
+
+.shadow-mid{
+    box-shadow: 0 4px 20px rgba(128, 128, 128, 0.12);
+}
+
+
 #header{
     font-family: 'Nunito', sans-serif;
     height: 30em;

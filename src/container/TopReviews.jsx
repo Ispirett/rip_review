@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Grid, Image, Divider } from "semantic-ui-react";
 import { actions, AppContext } from "./AppContainer";
 import Utils from "../helpers/Utils";
+
 const { host } = Utils;
 const apiGetTopRated = async token => {
   try {

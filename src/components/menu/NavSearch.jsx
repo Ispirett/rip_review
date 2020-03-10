@@ -13,8 +13,8 @@ const source = _.times(5, () => ({
 
 // const initialState = { isLoading: false, results: [], value: '' }
 
-export default () => {
-    const [state, dispatch] = useContext(AppContext)
+export default (props) => {
+    const [state, dispatch] = useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState([]);
     const [newValue, newSetValue] = useState('');
@@ -23,7 +23,6 @@ export default () => {
    const handleResultSelect = (e, { result }) =>{
        newSetValue(result.title);
         //alert(result.title);
-
    };
 
    const  handleSearchChange = (e, { value }) => {
@@ -47,7 +46,6 @@ export default () => {
         }, 300)
     };
 
-
         return (
             <Grid>
                 <Grid.Column width={6}>
@@ -60,6 +58,7 @@ export default () => {
                         })}
                         results={results}
                         value={newValue}
+                        size={props.size || 'huge'}
 
                     />
                 </Grid.Column>

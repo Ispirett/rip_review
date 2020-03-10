@@ -7,6 +7,7 @@ import MainContainer from "./container/MainContainer";
 import HeaderContainer from "./container/HeaderContainer";
 import TopReviews from "./container/TopReviews";
 import ReactGA from "react-ga";
+import SiteSearch from "./components/home/SiteSearch";
 const trackingId = "UA-159879631-1";
 ReactGA.initialize(trackingId);
 ReactGA.pageview(document.location.host);
@@ -15,6 +16,7 @@ function App() {
 return(
   <AppContainer >
      <HeaderContainer/>
+      <SiteSearch/>
      <TopReviews/>
      <MainContainer/>
    </AppContainer>
