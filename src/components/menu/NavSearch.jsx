@@ -58,7 +58,7 @@ export default (props) => {
                         })}
                         results={results}
                         value={newValue}
-                        size={props.size || 'huge'}
+                        size={props.size || 'large'}
 
                     />
                 </Grid.Column>

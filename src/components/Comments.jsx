@@ -69,21 +69,29 @@ export default props => {
 
   const createReview = () => {
     if (!Utils.isLoggedIn(state))
-
-      message({
+        message({
           title: 'Oops!',
           message: "you need to login in before commenting"
       });
+
     const data = {
       comment: input,
       reviewable_id: props.itemId
     };
 
     apiReviewPost(data, state.authentication.token).then(response => {
+        if(response.status === 'success')
         message({
-            title: 'Oops!',
-            message: "You need to be logged in before continuing!"
+            title: 'Success',
+            message: "Your review was saved!"
         });
+        else if(response.status === 'failed'){
+            message({
+                title: 'Oops!',
+                message: response.msg
+            });
+        }
+
       apiGetItems().then(response => {
         dispatch({ type: actions.ITEMS, items: response });
         //console.log(state.items);

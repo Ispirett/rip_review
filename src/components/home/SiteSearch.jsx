@@ -5,7 +5,7 @@ const options = [
     { key: 'business', text: 'Business', value: 'business' },
     { key: 'apartment', text: 'Apartment', value: 'apartment' },
     { key:'miscellaneous', text:'Miscellaneous', value: 'miscellaneous'},
-    {key: 'bank', text:'Bank', value: 'bank'}
+    { key: 'bank', text:'Bank', value: 'bank'},
 
 ];
 

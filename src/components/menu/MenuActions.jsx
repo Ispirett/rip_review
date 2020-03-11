@@ -25,11 +25,10 @@ export default  () => {
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
         // show notification if logged in.
-        if(state.authentication.login)
-        apiGetNotification(state.authentication.token).then(response => {
-            console.log(response);
+         if(Utils.isLoggedIn(state))
+           apiGetNotification(state.authentication.token).then(response => {
             setNotifications(response)
-        })
+           })
 
     }, []);
     return <Menu compact>
