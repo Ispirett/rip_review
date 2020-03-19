@@ -25,11 +25,12 @@ export default  () => {
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
         // show notification if logged in.
-         if(Utils.isLoggedIn(state))
-           apiGetNotification(state.authentication.token).then(response => {
-            setNotifications(response)
-           })
-
+         if(Utils.isLoggedIn(state)) {
+             apiGetNotification(state.authentication.token).then(response => {
+                 // TODO  need to add refresh token for authentication.
+                 if(response.status !== 'failed') setNotifications(response);
+             })
+         }
     }, []);
     return <Menu compact>
         <Popup trigger={
