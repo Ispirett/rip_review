@@ -22,7 +22,7 @@ const TopReviews = () => {
   const [state, dispatch] = useContext(AppContext);
   useEffect(() => {
     apiGetTopRated(state.authentication.token).then(response => {
-      console.log(response);
+      // console.log(response);
       dispatch({ type: actions.TOP_RATED, topRated: response });
     });
   },[]);

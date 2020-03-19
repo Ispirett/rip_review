@@ -13,7 +13,7 @@ export default (props) => {
             let response = await fetch(host.domain + host.allItems);
             return await response.json();
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 

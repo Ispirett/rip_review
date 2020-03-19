@@ -22,7 +22,7 @@ const apiGetItems = async () => {
     let response = await fetch(host.domain + host.allItems);
     return await response.json();
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
@@ -45,7 +45,10 @@ export default () => {
         </Dimmer>
       </Segment>
     );
-  } else console.log(state.items);
+  } else {
+    // console.log(state.items);
+  }
+
   return (
     <div className={'wrapper'}>
 

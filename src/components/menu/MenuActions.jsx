@@ -2,7 +2,7 @@ import {Icon, Label, Menu, Popup} from "semantic-ui-react";
 import HelpModal from "../help/HelpModal";
 import React, {useContext, useEffect, useState} from "react";
 import NotificationList from "./NoitficationList";
-import {AppContext} from "../../container/AppContainer";
+import {actions, AppContext} from "../../container/AppContainer";
 import Utils from "../../helpers/Utils";
 const {host} = Utils
 
@@ -17,18 +17,27 @@ const apiGetNotification = async (token) =>{
         });
         return response.json();
     } catch (e) {
-        console.log(e);
+        // console.log(e);
     }
 };
 export default  () => {
-    const [state] = useContext(AppContext);
+    const [state, dispatch] = useContext(AppContext);
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
         // show notification if logged in.
          if(Utils.isLoggedIn(state)) {
              apiGetNotification(state.authentication.token).then(response => {
                  // TODO  need to add refresh token for authentication.
-                 if(response.status !== 'failed') setNotifications(response);
+
+                 if(response.status === 'failed') {
+                     if(response.msg === 'Signature has expired'){
+                         dispatch({ type: actions.AUTH, token: response.refresh_token});
+                         Utils.tokenStore.store(response.refresh_token)
+                     }
+                 }
+                 else{
+                     setNotifications(response);
+                 }
              })
          }
     }, []);

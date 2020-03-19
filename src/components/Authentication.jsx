@@ -19,7 +19,7 @@ const apiLogin = async data => {
     });
     return response.json();
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
@@ -34,7 +34,7 @@ const apiSignUp = async data => {
         });
         return response.json();
     } catch (e) {
-        console.log(e);
+        // console.log(e);
     }
 };
 
