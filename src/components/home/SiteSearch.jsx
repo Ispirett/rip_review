@@ -11,7 +11,7 @@ const options = [
 
 const SiteSearch= () => (
     <div className={'wrapper shadow-mid'}>
-        <Dropdown  placeholder='Skills' fluid multiple selection options={options} />
+        <Dropdown  placeholder='Categories' fluid multiple selection options={options} />
     </div>
 
 )

@@ -4,6 +4,7 @@ import { Button, Form, Icon, Input, Popup} from "semantic-ui-react";
 import Utils from "../helpers/Utils";
 import message from "./messages/message";
 import ReactGA from 'react-ga'
+import ErrorHunter from "error_hunter/src/error_hunter";
 const { host} = Utils;
 
 
@@ -55,6 +56,7 @@ export default () => {
     apiLogin(data).then(response => {
       if(response.status === 'success') {
           // alert(response.status);
+          ErrorHunter.add_error('Login', 'User logged in perfectly',response,'info');
           message({
               title: 'Login Success',
               message: 'you are logged in!'

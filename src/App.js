@@ -12,6 +12,8 @@ const trackingId = "UA-159879631-1";
 ReactGA.initialize(trackingId);
 ReactGA.pageview(document.location.host);
 
+console.log(process.env.APP_NAME);
+console.log(process.env.TOKEN);
 function App() {
 return(
   <AppContainer >
